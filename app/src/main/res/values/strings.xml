@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">With_us</string>
+    <string name="facebook_application_id" translatable="false">1481835641976301</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fd1481835641976301</string>
 </resources>
