@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 // 파이어베이스 인증 객체 선언
-        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();  //mFirebaseAuth
 
         buttonGoogle = findViewById(R.id.btn_googleSignIn);
 
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 로그인 성공
+                            startActivity(new Intent(MainActivity.this,MateActivity.class));
                             Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                         } else {
                             // 로그인 실패
