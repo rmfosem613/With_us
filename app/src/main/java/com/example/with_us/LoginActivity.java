@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 로그인 성공
-                            startActivity(new Intent(LoginActivity.this,MateActivity.class));
+                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                         } else {
                             // 로그인 실패
