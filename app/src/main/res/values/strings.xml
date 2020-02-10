@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">With_us</string>
+    <string name="title_activity_bottom_nav_menu">bottom_nav_menu</string>
+    <string name="title_home">홈</string>
+    <string name="title_dashboard">글쓰기</string>
+    <string name="title_search">검색</string>
+    <string name="title_event">공모전</string>
+    <string name="title_mypage">마이페이지</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
