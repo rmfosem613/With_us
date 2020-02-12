@@ -7,8 +7,25 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="10dp"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
+    <EditText
+        android:layout_width="0dp"
+        android:layout_weight="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_marginTop="15dp"
+        android:id="@+id/username"
+        android:padding="10dp"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_weight="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Full_name"
+        android:layout_marginTop="15dp"
+        android:id="@+id/fullname"
+        android:padding="10dp"/>
 
     <EditText
         android:layout_width="0dp"
@@ -31,18 +48,18 @@
         android:padding="10dp"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/login"
-        android:text="Log in"
+        android:id="@+id/register"
+        android:text="Register"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="15dp"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Sign up"
-        android:id="@+id/txt_signup"
+        android:text="Already have an account? Log In"
+        android:id="@+id/txt_login"
         android:layout_margin="10dp"/>
 
 
