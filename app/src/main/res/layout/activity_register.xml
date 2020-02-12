@@ -9,6 +9,25 @@
     android:padding="10dp"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="118dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="5dp"
+        android:text="회원가입"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_gravity="left"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft=""
+        android:src="@drawable/puzzle" />
+
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
