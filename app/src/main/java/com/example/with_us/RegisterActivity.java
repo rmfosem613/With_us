@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (str_password.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "비밀번호를 6자 이상으로 설정해주세요.",Toast.LENGTH_SHORT).show();
                 } else {
-
+                    register(str_username, str_fullname, str_email, str_password);
                 }
             }
         });
