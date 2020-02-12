@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -55,14 +62,46 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+                final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
                 pd.setMessage("잠시만 기다려주세요...");
                 pd.show();
 
                 String str_email = email.getText().toString();
                 String str_password = password.getText().toString();
 
-                if(Text)
+                if(TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)) {
+                    Toast.makeText(LoginActivity.this, "이메일과 비밀번호를 입력해주세요!",Toast.LENGTH_SHORT).show();
+                } else {
+                    auth.signInWithEmailAndPassword(str_email, str_password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users")
+                                                .child(auth.getCurrentUser().getUid());
+
+                                        reference.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                pd.dismiss();
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                pd.dismiss();
+                                            }
+                                        });
+                                    } else {
+                                        pd.dismiss();
+                                        Toast.makeText(LoginActivity.this, "사용자 인증 실패! 이메일 혹은 비밀번호를 확인해 주세요.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
             }
         });
     }
