@@ -61,9 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd = new ProgressDialog(RegisterActivity.this);
-                pd.setMessage("잠시만 기다려주세요...");
-                pd.show();
+
 
                 String str_username = username.getText().toString();
                 String str_fullname = fullname.getText().toString();
@@ -75,6 +73,9 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (str_password.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "비밀번호를 6자 이상으로 설정해주세요.",Toast.LENGTH_SHORT).show();
                 } else {
+                    pd = new ProgressDialog(RegisterActivity.this);
+                    pd.setMessage("잠시만 기다려주세요...");
+                    pd.show();
                     register(str_username, str_fullname, str_email, str_password);
                 }
             }
@@ -112,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
                             });
                         } else {
                             pd.dismiss();
-                            Toast.makeText(RegisterActivity.this, "이 이메일 혹은 비밀번호로 회원가입 할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "이미 존재하는 이메일 입니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
