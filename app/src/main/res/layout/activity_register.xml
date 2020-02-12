@@ -9,74 +9,63 @@
     android:padding="10dp"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="118dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="5dp"
-        android:text="회원가입"
-        android:textAlignment="center"
-        android:textSize="25dp"
-        android:layout_gravity="left"/>
+        <TextView
+            android:layout_width="118dp"
+            android:layout_height="45dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text="회원가입"
+            android:textAlignment="center"
+            android:textSize="25dp" />
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft=""
-        android:src="@drawable/puzzle" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="Username"
+            android:padding="10dp" />
 
+        <EditText
+            android:id="@+id/fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="Full_name"
+            android:padding="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username"
-        android:layout_marginTop="15dp"
-        android:id="@+id/username"
-        android:padding="10dp"/>
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Full_name"
-        android:layout_marginTop="15dp"
-        android:id="@+id/fullname"
-        android:padding="10dp"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:layout_marginTop="15dp"
-        android:inputType="textEmailAddress"
-        android:id="@+id/email"
-        android:padding="10dp"/>
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Register"
+            android:textColor="@color/colorPrimary" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:layout_marginTop="15dp"
-        android:inputType="textPassword"
-        android:id="@+id/password"
-        android:padding="10dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/register"
-        android:text="Register"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginTop="15dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already have an account? Log In"
-        android:id="@+id/txt_login"
-        android:layout_margin="10dp"/>
-
-
+        <TextView
+            android:id="@+id/txt_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Already have an account? Log In" />
 
 </LinearLayout>
