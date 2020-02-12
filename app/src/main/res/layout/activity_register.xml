@@ -7,11 +7,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="10dp"
-    tools:context=".RegisterActivity">
+    android:orientation="vertical">
 
     <EditText
-        android:layout_width="0dp"
-        android:layout_weight="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
         android:layout_marginTop="15dp"
@@ -19,8 +18,7 @@
         android:padding="10dp"/>
 
     <EditText
-        android:layout_width="0dp"
-        android:layout_weight="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Full_name"
         android:layout_marginTop="15dp"
@@ -28,8 +26,7 @@
         android:padding="10dp"/>
 
     <EditText
-        android:layout_width="0dp"
-        android:layout_weight="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
         android:layout_marginTop="15dp"
@@ -38,8 +35,7 @@
         android:padding="10dp"/>
 
     <EditText
-        android:layout_width="0dp"
-        android:layout_weight="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
         android:layout_marginTop="15dp"
