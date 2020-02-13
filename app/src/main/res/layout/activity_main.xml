@@ -2,10 +2,40 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".MainActivity"
     android:paddingTop="?attr/actionBarSize">
+<!--
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom"
+        android:id="@+id/nav_host_fragment"/>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:id="@+id/bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nav_view"
+            app:itemIconTint="@color/colorAccent"
+            app:labelVisibilityMode="unlabeled"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/bottom_nav_menu">
+
+        </android.support.design.widget.BottomNavigationView>
+
+    </android.support.design.widget.AppBarLayout>
+-->
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
