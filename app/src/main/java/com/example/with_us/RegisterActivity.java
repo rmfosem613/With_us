@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText username, fullname, email, password;
+    EditText username, email, password, subject;
     Button register;
     TextView txt_login;
 
@@ -40,11 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         username = findViewById(R.id.username);
-        fullname = findViewById(R.id.fullname);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
         txt_login = findViewById(R.id.txt_login);
+        subject = findViewById(R.id.subject);
 
         auth = FirebaseAuth.getInstance();
 
@@ -64,11 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 String str_username = username.getText().toString();
-                String str_fullname = fullname.getText().toString();
                 String str_email = email.getText().toString();
                 String str_password = password.getText().toString();
+                String str_subject = subject.getText().toString();
 
-                if(TextUtils.isEmpty(str_username) || TextUtils.isEmpty(str_fullname) || TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)) {
+                if(TextUtils.isEmpty(str_username) || TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password) || TextUtils.isEmpty(str_subject)) {
                     Toast.makeText(RegisterActivity.this, "모든 항목을 입력해주세요!",Toast.LENGTH_SHORT).show();
                 } else if (str_password.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "비밀번호를 6자 이상으로 설정해주세요.",Toast.LENGTH_SHORT).show();
@@ -76,13 +76,14 @@ public class RegisterActivity extends AppCompatActivity {
                     pd = new ProgressDialog(RegisterActivity.this);
                     pd.setMessage("잠시만 기다려주세요...");
                     pd.show();
-                    register(str_username, str_fullname, str_email, str_password);
+                    register(str_username, str_email, str_password, str_subject);
                 }
             }
         });
     }
 
-    private void register(final String username, final String fullname, String email, String password){
+
+    private void register(final String username, String email, String password, final String subject){
         auth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -96,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id",userid);
                             hashMap.put("username", username.toLowerCase());
-                            hashMap.put("fullname", fullname);
+                            hashMap.put("subject", subject);
                             hashMap.put("bio","");
                             hashMap.put("imageurl","https://firebasestorage.googleapis.com/v0/b/withus-c3945.appspot.com/o/private.png?alt=media&token=b709010c-5277-44d1-ae34-b46fffa4f78a");
 

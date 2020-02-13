@@ -25,24 +25,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:inputType="textNoSuggestions"
-            android:hint="Username"
+            android:hint="이름"
             android:padding="10dp" />
 
-        <EditText
-            android:id="@+id/fullname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:inputType="textNoSuggestions"
-            android:hint="Full_name"
-            android:padding="10dp" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:hint="Email"
+            android:hint="이메일"
             android:inputType="textEmailAddress"
             android:padding="10dp" />
 
@@ -51,9 +43,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:hint="Password"
+            android:hint="비밀번호"
             android:inputType="textPassword"
             android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="학과"
+            android:inputType="textNoSuggestions"
+            android:padding="10dp" />
+
 
         <Button
             android:id="@+id/register"
