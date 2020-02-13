@@ -7,13 +7,15 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/loginimage">
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="이메일"
+        android:textColorHint="@color/White"
         android:layout_marginTop="15dp"
         android:inputType="textEmailAddress"
         android:id="@+id/email"
@@ -23,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="비밀번호"
+        android:textColorHint="@color/White"
         android:layout_marginTop="15dp"
         android:inputType="textPassword"
         android:id="@+id/password"
@@ -33,7 +36,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/login"
         android:text="Log in"
-        android:textColor="@color/colorPrimary"
+        android:background="@drawable/button"
+        android:textColor="@color/White"
         android:layout_marginTop="15dp"/>
 
     <Button
@@ -41,7 +45,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_signup"
         android:text="Sign up"
-        android:textColor="@color/colorPrimary"
+        android:background="@drawable/button"
+        android:textColor="@color/White"
         android:layout_marginTop="10dp"/>
 
 
