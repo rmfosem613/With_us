@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/homeicon"
+        android:title="@string/title_home"
+        />
+
+    <item
+        android:id="@+id/nav_event"
+        android:icon="@drawable/eventicon"
+        android:title="@string/title_event"/>
+
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/writeicon"
+        android:title="@string/title_dashboard"/>
+
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/searchicon"
+        android:title="@string/title_search"/>
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/mypageicon"
+        android:title="@string/title_mypage"/>
+</menu>
