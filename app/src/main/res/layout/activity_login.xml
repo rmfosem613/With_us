@@ -13,7 +13,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="이메일"
         android:layout_marginTop="15dp"
         android:inputType="textEmailAddress"
         android:id="@+id/email"
@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="비밀번호"
         android:layout_marginTop="15dp"
         android:inputType="textPassword"
         android:id="@+id/password"

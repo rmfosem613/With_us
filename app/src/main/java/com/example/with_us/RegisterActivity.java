@@ -61,7 +61,9 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pd = new ProgressDialog(RegisterActivity.this);
+                pd.setMessage("잠시만 기다려주세요...");
+                pd.show();
 
                 String str_username = username.getText().toString();
                 String str_email = email.getText().toString();
@@ -73,9 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (str_password.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "비밀번호를 6자 이상으로 설정해주세요.",Toast.LENGTH_SHORT).show();
                 } else {
-                    pd = new ProgressDialog(RegisterActivity.this);
-                    pd.setMessage("잠시만 기다려주세요...");
-                    pd.show();
                     register(str_username, str_email, str_password, str_subject);
                 }
             }
