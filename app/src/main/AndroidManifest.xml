@@ -10,7 +10,8 @@
         android:label="With us"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PortfolioActivity"></activity>
+        <activity android:name=".PostPortfolioActivity"></activity>
+        <activity android:name=".PortfolioActivity" />
         <activity android:name=".PostActivity" />
         <activity android:name=".RegisterActivity" />
         <activity

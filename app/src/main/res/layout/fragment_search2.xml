@@ -30,6 +30,8 @@
         android:id="@+id/search_bar"
         android:background="@drawable/searchbar"
         android:hint="사용자 찾기"
+        android:fontFamily="@font/yanolja_regular"
+        android:textSize="25dp"
         android:layout_marginRight="5dp"/>
 
     </androidx.appcompat.widget.Toolbar>

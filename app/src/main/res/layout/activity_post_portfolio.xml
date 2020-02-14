@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostPortfolioActivity"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bar"
+        android:background="?android:attr/windowBackground">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            android:id="@+id/toolbar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/portfoliopost"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="6dp"
+                    android:text="포트폴리오 올리기"
+                    android:textSize="35dp"
+                    android:fontFamily="@font/yanolja_regular" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_close" />
+
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/yanolja_regular"
+            android:text="Project >"
+            android:textSize="25dp" />
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchbar"
+            android:hint="프로젝트명을 입력하세요."
+            android:layout_alignParentEnd="true"
+            android:id="@+id/portfoliotitle"
+            android:layout_marginRight="9dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/yanolja_regular"
+            android:text="기간         >"
+            android:textSize="25dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/image_added"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="프로젝트에 대한 설명을 5줄 이내로 작성해주세요."
+            android:maxLines="5"
+            android:id="@+id/description"/>
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="right"
+            android:src="@drawable/savebutton"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
