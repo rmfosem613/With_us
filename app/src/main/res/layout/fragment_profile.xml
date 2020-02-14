@@ -46,5 +46,37 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp">
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:id="@+id/portfolio"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="42dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/yanolja_regular"
+            android:text="포트폴리오"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25dp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="42dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/yanolja_regular"
+            android:text="내가 찜한 게시글"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25dp" />
+
+
+    </RelativeLayout>
+
+
 
 </RelativeLayout>
