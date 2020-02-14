@@ -42,7 +42,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/ic_close" />
+                    android:src="@drawable/ic_close"
+                    android:id="@+id/close"/>
 
             </RelativeLayout>
 
@@ -121,7 +122,8 @@
             android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:layout_gravity="right"
-            android:src="@drawable/savebutton"/>
+            android:src="@drawable/savebutton"
+            android:id="@+id/post"/>
 
     </LinearLayout>
 
