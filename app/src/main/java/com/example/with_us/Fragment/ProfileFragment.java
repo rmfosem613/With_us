@@ -53,6 +53,12 @@ public class ProfileFragment extends Fragment {
     TextView posts, portfolios, heart, username, subject, bio;
     Button edit_profile;
 
+    //프로필에 보이기 위해서
+    private List<String> mySaves;
+    RecyclerView recyclerView_saves;
+    MyPotofolioAdapter myPotofolioAdapter_saves;
+    List<Post> postList_saves;
+
     RecyclerView recyclerView;
     MyPotofolioAdapter myPotofolioAdapter;
     List<Post> postList;
@@ -94,7 +100,7 @@ public class ProfileFragment extends Fragment {
         subject = view.findViewById(R.id.subject);
         //bio = view.findViewById(R.id.bio);
 
-        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_portfolio);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -102,9 +108,22 @@ public class ProfileFragment extends Fragment {
         myPotofolioAdapter = new MyPotofolioAdapter(getContext(), postList);
         recyclerView.setAdapter(myPotofolioAdapter);
 
+        //프로필에 따로 보이게 하려고 하는 거
+        recyclerView_saves = view.findViewById(R.id.recycler_project);
+        recyclerView_saves.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_saves = new GridLayoutManager(getContext(), 3);
+        recyclerView_saves.setLayoutManager(linearLayoutManager_saves);
+        postList_saves = new ArrayList<>();
+        myPotofolioAdapter_saves = new MyPotofolioAdapter(getContext(), postList_saves);
+        recyclerView_saves.setAdapter(myPotofolioAdapter_saves);
+
+        recyclerView.setVisibility(View.VISIBLE);
+        recyclerView_saves.setVisibility(View.GONE);
+
         userInfo();
         getNPosts();
         myPortfolio();
+        mysaves();
 
         if(profileid.equals(firebaseUser.getUid())) {
             edit_profile.setText("Edit Profile");
@@ -125,13 +144,30 @@ public class ProfileFragment extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(user.getId()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
-                            .child("follosers").child(firebaseUser.getUid()).setValue(true);
+                            .child("followers").child(firebaseUser.getUid()).setValue(true);
                 } else if (btn.equals("following")) {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
-                            .child("follosers").child(firebaseUser.getUid()).removeValue();
+                            .child("followers").child(firebaseUser.getUid()).removeValue();
                 }
+            }
+        });
+
+        //프로필에서 버튼 전환하는 거
+        my_project.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.GONE);
+                recyclerView_saves.setVisibility(View.VISIBLE);
+            }
+        });
+
+        my_portfolio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.VISIBLE);
+                recyclerView_saves.setVisibility(View.GONE);
             }
         });
 
@@ -220,6 +256,50 @@ public class ProfileFragment extends Fragment {
                 }
                 Collections.reverse(postList);
                 myPotofolioAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void mysaves() {
+        mySaves = new ArrayList<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Saves")
+                .child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    mySaves.add(snapshot.getKey());
+                }
+
+                readSaves();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void readSaves() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Post post = snapshot.getValue(Post.class);
+
+                    for (String id : mySaves) {
+                        if (post.getPostid().equals(id)) {
+                            postList_saves.add(post);
+                        }
+                    }
+                }
+                myPotofolioAdapter_saves.notifyDataSetChanged();
             }
 
             @Override

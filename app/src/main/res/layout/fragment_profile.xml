@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="70dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -195,9 +195,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="-5dp"
             android:layout_marginRight="-5dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/last_bar"
             android:background="@drawable/button_black"
             android:orientation="horizontal">
@@ -219,17 +220,17 @@
                 style="?android:attr/buttonBarButtonStyle" />
 
         </LinearLayout>
-
+//프로젝트 보여줄 곳
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recycler_view"/>
-
+                android:id="@+id/recycler_project"/>
+//포트폴리오 보여줄 곳
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:id="@+id/recycler_view_save"/>
+                android:id="@+id/recycler_portfolio"/>
 
             <Button
                 android:layout_width="120dp"
