@@ -141,6 +141,8 @@ public class PostPortfolioActivity extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();
+
+            image_added.setImageURI(imageUri);
         } else {
             Toast.makeText(this, "오류가 났습니다!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(PostPortfolioActivity.this, MainActivity.class));

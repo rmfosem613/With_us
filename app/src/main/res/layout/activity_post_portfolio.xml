@@ -51,63 +51,68 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/yanolja_regular"
-            android:text="Project >"
-            android:textSize="25dp" />
-
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/searchbar"
-            android:hint="프로젝트명을 입력하세요."
-            android:layout_alignParentEnd="true"
-            android:id="@+id/portfoliotitle"
-            android:layout_marginRight="9dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/yanolja_regular"
-            android:text="기간         >"
-            android:textSize="25dp" />
-    </RelativeLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/bar">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:orientation="vertical">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:scaleType="centerInside"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/yanolja_regular"
+                android:text="Project >"
+                android:textSize="25dp" />
+
+            <EditText
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/searchbar"
+                android:hint="프로젝트명을 입력하세요."
+                android:layout_alignParentEnd="true"
+                android:id="@+id/portfoliotitle"
+                android:layout_marginRight="9dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="25dp"
+                android:text="기간         >"
+                android:textSize="25dp"
+                android:fontFamily="@font/yanolja_regular"
+                />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/image_added"
+            android:layout_width="330dp"
+            android:layout_height="440dp"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
-            android:id="@+id/image_added"/>
+            android:layout_marginTop="15dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
 
         <EditText
             android:layout_width="match_parent"
@@ -125,7 +130,9 @@
             android:src="@drawable/savebutton"
             android:id="@+id/post"/>
 
+
     </LinearLayout>
 
+</ScrollView>
 
 </LinearLayout>
