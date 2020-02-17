@@ -100,6 +100,7 @@ public class ProfileFragment extends Fragment {
         subject = view.findViewById(R.id.subject);
         //bio = view.findViewById(R.id.bio);
 
+        //야이가 포트폴리오
         recyclerView = view.findViewById(R.id.recycler_portfolio);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
@@ -108,7 +109,7 @@ public class ProfileFragment extends Fragment {
         myPotofolioAdapter = new MyPotofolioAdapter(getContext(), postList);
         recyclerView.setAdapter(myPotofolioAdapter);
 
-        //프로필에 따로 보이게 하려고 하는 거
+        //프로필에 따로 보이게 하려고 하는 거(프로젝트)
         recyclerView_saves = view.findViewById(R.id.recycler_project);
         recyclerView_saves.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager_saves = new GridLayoutManager(getContext(), 3);
@@ -117,8 +118,10 @@ public class ProfileFragment extends Fragment {
         myPotofolioAdapter_saves = new MyPotofolioAdapter(getContext(), postList_saves);
         recyclerView_saves.setAdapter(myPotofolioAdapter_saves);
 
-        recyclerView.setVisibility(View.VISIBLE);
-        recyclerView_saves.setVisibility(View.GONE);
+
+
+        recyclerView.setVisibility(View.GONE);
+        recyclerView_saves.setVisibility(View.VISIBLE);
 
         userInfo();
         getNPosts();
