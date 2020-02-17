@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.with_us.Fragment.AddFragment;
 import com.example.with_us.Fragment.EventFragment;
