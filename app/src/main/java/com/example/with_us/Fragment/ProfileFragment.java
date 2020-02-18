@@ -57,6 +57,8 @@ public class ProfileFragment extends Fragment {
     private List<String> mySaves;
     RecyclerView recyclerView_project;
     MyPotofolioAdapter myPotofolioAdapter_project;
+
+    //
     List<Post> postList_project;
 
     RecyclerView recyclerView;
