@@ -67,6 +67,8 @@ public class ProfileFragment extends Fragment {
     String profileid;
 
     ImageButton my_project, my_portfolio;
+
+
     private User user;
 
     @Override
