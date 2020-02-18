@@ -52,7 +52,7 @@ public class PostDetailFragment extends Fragment {
         recyclerView.setAdapter(postAdapter);
 
         //오류 남
-        readPost();
+        //readPost();
 
         return view;
     }
