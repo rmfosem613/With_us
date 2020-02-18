@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     Button portfolio;
 
     ImageView image_profile;
-    TextView posts, portfolios, heart, username, subject, bio;
+    TextView posts, portfolios, heart, username, subject;
     Button edit_profile;
 
     //프로필에 보이기 위해서
@@ -98,7 +98,6 @@ public class ProfileFragment extends Fragment {
         my_portfolio = view.findViewById(R.id.my_portfolio);
         username = view.findViewById(R.id.username);
         subject = view.findViewById(R.id.subject);
-        //bio = view.findViewById(R.id.bio);
 
         //야이가 포트폴리오
         recyclerView = view.findViewById(R.id.recycler_portfolio);
@@ -192,7 +191,6 @@ public class ProfileFragment extends Fragment {
                 Glide.with(getContext()).load(user.getImageurl()).into(image_profile);
                 username.setText(user.getUsername());
                 subject.setText(user.getSubject());
-                //bio.setText(user.getBio());
             }
 
             @Override

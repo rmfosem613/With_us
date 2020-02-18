@@ -6,14 +6,12 @@ public class User {
     private String username;
     private String subject;
     private String imageurl;
-    private String bio;
 
-    public User(String id, String username, String subject, String imageurl, String bio) {
+    public User(String id, String username, String subject, String imageurl) {
         this.id = id;
         this.username = username;
         this.subject = subject;
         this.imageurl = imageurl;
-        this.bio = bio;
 
     }
 
@@ -53,11 +51,4 @@ public class User {
         this.imageurl = imageurl;
     }
 
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
 }
