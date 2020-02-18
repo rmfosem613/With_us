@@ -182,6 +182,18 @@
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/portfolio"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="42dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/yanolja_regular"
+                android:text="포트폴리오"
+                android:background="@drawable/searchbar2"
+                android:textSize="25dp" />
 <!--
             <TextView
                 android:layout_width="wrap_content"
@@ -219,35 +231,31 @@
                 android:src="@drawable/ic_port"
                 style="?android:attr/buttonBarButtonStyle" />
 
-        </LinearLayout>
-//프로젝트 보여줄 곳
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recycler_project"/>
-//포트폴리오 보여줄 곳
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:id="@+id/recycler_portfolio"/>
 
-            <Button
-                android:layout_width="120dp"
-                android:layout_height="45dp"
-                android:id="@+id/portfolio"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="42dp"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/yanolja_regular"
-                android:text="포트폴리오"
-                android:background="@drawable/searchbar2"
-                android:textSize="25dp" />
+        </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bar"
+        android:layout_marginTop="0dp">
 
+        //프로젝트 보여줌
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_project"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        //포트폴리오 보여줌
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_portfolio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -55,12 +55,12 @@ public class ProfileFragment extends Fragment {
 
     //프로필에 보이기 위해서
     private List<String> mySaves;
-    RecyclerView recyclerView_saves;
-    MyPotofolioAdapter myPotofolioAdapter_saves;
-    List<Post> postList_saves;
+    RecyclerView recyclerView_project;
+    MyPotofolioAdapter myPotofolioAdapter_project;
+    List<Post> postList_project;
 
     RecyclerView recyclerView;
-    MyPotofolioAdapter myPotofolioAdapter;
+    MyPotofolioAdapter myPortofolioAdapter;
     List<Post> postList;
 
     FirebaseUser firebaseUser;
@@ -105,22 +105,22 @@ public class ProfileFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(linearLayoutManager);
         postList = new ArrayList<>();
-        myPotofolioAdapter = new MyPotofolioAdapter(getContext(), postList);
-        recyclerView.setAdapter(myPotofolioAdapter);
+        myPortofolioAdapter = new MyPotofolioAdapter(getContext(), postList);
+        recyclerView.setAdapter(myPortofolioAdapter);
 
         //프로필에 따로 보이게 하려고 하는 거(프로젝트)
-        recyclerView_saves = view.findViewById(R.id.recycler_project);
-        recyclerView_saves.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager_saves = new GridLayoutManager(getContext(), 3);
-        recyclerView_saves.setLayoutManager(linearLayoutManager_saves);
-        postList_saves = new ArrayList<>();
-        myPotofolioAdapter_saves = new MyPotofolioAdapter(getContext(), postList_saves);
-        recyclerView_saves.setAdapter(myPotofolioAdapter_saves);
+        recyclerView_project = view.findViewById(R.id.recycler_project);
+        recyclerView_project.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_project= new GridLayoutManager(getContext(), 3);
+        recyclerView_project.setLayoutManager(linearLayoutManager_project);
+        postList_project = new ArrayList<>();
+        myPotofolioAdapter_project = new MyPotofolioAdapter(getContext(), postList_project);
+        recyclerView_project.setAdapter(myPotofolioAdapter_project);
 
 
 
         recyclerView.setVisibility(View.GONE);
-        recyclerView_saves.setVisibility(View.VISIBLE);
+        recyclerView_project.setVisibility(View.VISIBLE);
 
         userInfo();
         getNPosts();
@@ -161,7 +161,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 recyclerView.setVisibility(View.GONE);
-                recyclerView_saves.setVisibility(View.VISIBLE);
+                recyclerView_project.setVisibility(View.VISIBLE);
             }
         });
 
@@ -169,7 +169,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 recyclerView.setVisibility(View.VISIBLE);
-                recyclerView_saves.setVisibility(View.GONE);
+                recyclerView_project.setVisibility(View.GONE);
             }
         });
 
@@ -256,7 +256,7 @@ public class ProfileFragment extends Fragment {
                     }
                 }
                 Collections.reverse(postList);
-                myPotofolioAdapter.notifyDataSetChanged();
+                myPortofolioAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -296,11 +296,11 @@ public class ProfileFragment extends Fragment {
 
                     for (String id : mySaves) {
                         if (post.getPostid().equals(id)) {
-                            postList_saves.add(post);
+                            postList_project.add(post);
                         }
                     }
                 }
-                myPotofolioAdapter_saves.notifyDataSetChanged();
+                myPotofolioAdapter_project.notifyDataSetChanged();
             }
 
             @Override

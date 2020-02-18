@@ -60,6 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
         publisherInfo(holder.image_profile, holder.username, holder.publisher, post.getPublisher());
+
         //프로필에서 포트폴리오와 프로젝트 사진을 다르게 보여주는 거
         holder.save.setOnClickListener(new View.OnClickListener() {
             @Override
