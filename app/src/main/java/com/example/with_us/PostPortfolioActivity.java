@@ -144,7 +144,7 @@ public class PostPortfolioActivity extends AppCompatActivity {
 
             image_added.setImageURI(imageUri);
         } else {
-            Toast.makeText(this, "오류가 났습니다!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "다시 시도해 주세요!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(PostPortfolioActivity.this, MainActivity.class));
             finish();
         }
