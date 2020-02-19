@@ -1,5 +1,7 @@
 package com.example.with_us.Model;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,4 +73,11 @@ public class Post {
         this.publisher = publisher;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        String content = "작성자 : " + publisher + ", 제목 :" + portfoliotitle;
+
+        return content;
+    }
 }

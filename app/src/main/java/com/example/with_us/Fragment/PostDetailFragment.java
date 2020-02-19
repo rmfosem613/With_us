@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,30 +45,50 @@ public class PostDetailFragment extends Fragment {
         postid = preferences.getString("postid", "none");
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
+//        recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         postList = new ArrayList<>();
         postAdapter = new PostAdapter(getContext(), postList);
         recyclerView.setAdapter(postAdapter);
 
-        //오류 남
+
         readPost();
+
+
 
         return view;
     }
 
     private void readPost() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postid);
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postid);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Posts").getRef();
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-                Post post = dataSnapshot.getValue(Post.class);
-                postList.add(post);
+                // https://stackoverflow.com/questions/46429529/firebase-get-the-reference-of-the-child-of-a-child
+                boolean bOffset = true;
+                int offset = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    //here is your every post
+                    String key = snapshot.getKey();
+                    Post value = snapshot.getValue(Post.class);
+
+                    postList.add(value);
+
+                    if (bOffset) {
+                        offset++;
+                    }
+
+                    if (postid.equals(value.getPostid())) {
+                        bOffset = false;
+                        Log.d("ddd", "height: " + recyclerView.computeHorizontalScrollOffset());
+                    }
+                }
 
                 postAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(offset - 1);
             }
 
             @Override
