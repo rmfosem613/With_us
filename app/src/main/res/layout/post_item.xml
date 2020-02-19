@@ -53,8 +53,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textStyle="bold"
+            android:id="@+id/portfoliotitle"
+            android:text="portfoliotitle"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:id="@+id/portfoliodate"
+            android:text="portfoliodate"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:id="@+id/description"
+            android:textStyle="bold"
             android:text="description"
             android:textColor="@color/colorPrimaryDark"/>
 

@@ -79,7 +79,7 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/searchbar"
-                android:hint="프로젝트를 생성 이유를 적어주세요."
+                android:hint="프로젝트를 생성이유를 적어주세요."
                 android:id="@+id/purpose_write"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="49dp"/>

@@ -38,7 +38,7 @@ public class PostPortfolioActivity extends AppCompatActivity {
     StorageReference storageReference;
 
     ImageView image_added, close, post;
-    EditText description;
+    EditText description, portfoliotitle, portfoliodate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,8 @@ public class PostPortfolioActivity extends AppCompatActivity {
         image_added = findViewById(R.id.image_added);
         post = findViewById(R.id.post);
         description = findViewById(R.id.description);
+        portfoliotitle = findViewById(R.id.portfoliotitle);
+        portfoliodate = findViewById(R.id.portfoliodate);
 
         storageReference = FirebaseStorage.getInstance().getReference("posts");
 
@@ -111,6 +113,8 @@ public class PostPortfolioActivity extends AppCompatActivity {
                         hashMap.put("postid", postid);
                         hashMap.put("postimage", myUri);
                         hashMap.put("description", description.getText().toString());
+                        hashMap.put("portfoliotitle", portfoliotitle.getText().toString());
+                        hashMap.put("portfoliodate", portfoliodate.getText().toString());
                         hashMap.put("publisher", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                         reference.child(postid).setValue(hashMap);

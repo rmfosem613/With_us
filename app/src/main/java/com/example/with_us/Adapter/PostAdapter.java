@@ -2,6 +2,7 @@ package com.example.with_us.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -55,9 +59,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Post post = mPost.get(position);
+        Log.d("ms", post.getPostimage().toString());
 
         //에러
-        Glide.with(mContext).load(post.getPostimage()).into(holder.post_image);
+        Glide
+                .with(mContext)
+                .load(post.getPostimage())
+                .into(holder.post_image);
 
         if (post.getDescription().equals("")) {
             holder.description.setVisibility(View.GONE);
@@ -77,7 +85,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 editor.putString("profiled", post.getPublisher());
                 editor.apply();
 
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
             }
         });
@@ -90,7 +98,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 editor.putString("profileid", post.getPublisher());
                 editor.apply();
 
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
             }
         });
@@ -102,7 +110,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 editor.putString("profileid", post.getPublisher());
                 editor.apply();
 
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
             }
         });
@@ -114,7 +122,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 editor.putString("postid", post.getPostid());
                 editor.apply();
 
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new PostDetailFragment()).commit();
             }
         });
@@ -139,22 +147,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return mPost.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        public ImageView image_profile, post_image, like, comment, save;
-        public TextView username, subject, likes, publisher, description, comments;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            image_profile = itemView.findViewById(R.id.image_profile);
-            username = itemView.findViewById(R.id.username);
-            subject = itemView.findViewById(R.id.subject);
-            publisher = itemView.findViewById(R.id.publisher);
-            post_image = itemView.findViewById(R.id.post_image);
-            description = itemView.findViewById(R.id.description);
-        }
-    }
 
     private void publisherInfo(final ImageView image_profile, final TextView username, final TextView publisher, String userid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
@@ -194,5 +186,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             }
         });
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public ImageView image_profile, post_image, like, comment, save;
+        public TextView username, subject, likes, publisher, description, portfoliotitle, portfoliodate;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            image_profile = itemView.findViewById(R.id.image_profile);
+            username = itemView.findViewById(R.id.username);
+            subject = itemView.findViewById(R.id.subject);
+            publisher = itemView.findViewById(R.id.publisher);
+            post_image = itemView.findViewById(R.id.post_image);
+            description = itemView.findViewById(R.id.description);
+            portfoliotitle = itemView.findViewById(R.id.portfoliotitle);
+            portfoliodate = itemView.findViewById(R.id.portfoliodate);
+        }
     }
 }

@@ -1,16 +1,23 @@
 package com.example.with_us.Model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Post {
     private String postid;
     private String postimage;
     private String description;
     private String publisher;
+    private String portfoliotitle;
+    private String portfoliodate;
 
-    public Post(String postid, String postimage, String description, String publisher) {
+    public Post(String postid, String postimage, String description, String publisher, String portfoliotitle, String portfoliodate) {
         this.postid = postid;
         this.postimage = postimage;
         this.description = description;
         this.publisher = publisher;
+        this.portfoliotitle = portfoliotitle;
+        this.portfoliodate = portfoliodate;
     }
 
     public Post() {
@@ -40,6 +47,22 @@ public class Post {
         this.description = description;
     }
 
+    public String getPortfoliotitle() {
+        return portfoliotitle;
+    }
+
+    public void setPortfoliotitle(String portfoliotitle) {
+        this.portfoliotitle = portfoliotitle;
+    }
+
+    public String getPortfoliodate() {
+        return portfoliodate;
+    }
+
+    public void setPortfoliodate(String portfoliodate) {
+        this.portfoliodate = portfoliodate;
+    }
+
     public String getPublisher() {
         return publisher;
     }
@@ -47,4 +70,5 @@ public class Post {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
+
 }

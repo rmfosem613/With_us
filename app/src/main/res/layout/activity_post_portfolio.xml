@@ -100,8 +100,17 @@
                 android:layout_marginStart="25dp"
                 android:text="기간         >"
                 android:textSize="25dp"
-                android:fontFamily="@font/yanolja_regular"
-                />
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/yanolja_regular" />
+
+            <EditText
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/searchbar"
+                android:hint="프로젝트 기간을 입력하세요."
+                android:layout_alignParentEnd="true"
+                android:id="@+id/portfoliodate"
+                android:layout_marginRight="9dp"/>
 
         </RelativeLayout>
 
