@@ -96,7 +96,6 @@ public class ProfileFragment extends Fragment {
         image_profile = view.findViewById(R.id.image_profile);
         posts = view.findViewById(R.id.posts);
         portfolios = view.findViewById(R.id.project);
-        heart = view.findViewById(R.id.heart);
         edit_profile = view.findViewById(R.id.edit_profile);
         my_project = view.findViewById(R.id.my_project);
         my_portfolio = view.findViewById(R.id.my_portfolio);
@@ -132,7 +131,7 @@ public class ProfileFragment extends Fragment {
         mysaves();
 
         if(profileid.equals(firebaseUser.getUid())) {
-            edit_profile.setText("Edit Profile");
+            edit_profile.setText("프로필 수정");
         } else {
             checkFollow();
            // saved_fotos.setvisibility(View.GONE);

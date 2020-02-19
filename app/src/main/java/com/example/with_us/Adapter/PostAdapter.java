@@ -37,21 +37,21 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
-    public Context mContext;
-    public List<Post> mPost;
+    private Context mContext;
+    private List<Post> mPost;
 
     private FirebaseUser firebaseUser;
 
-    public PostAdapter(Context mContext, List<Post> mPost) {
-        this.mContext = mContext;
-        this.mPost = mPost;
+    public PostAdapter(Context context, List<Post> posts) {
+        mContext = context;
+        mPost = posts;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
-        return new ViewHolder(view);
+    public PostAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.post_item, parent, false);
+        return new PostAdapter.ViewHolder(view);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         new PostDetailFragment()).commit();
             }
         });
-
+/*
         //프로필에서 포트폴리오와 프로젝트 사진을 다르게 보여주는 거
         holder.save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,53 +139,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                             .child(post.getPostid()).removeValue();
                 }
             }
-        });
+        });*/
     }
 
     @Override
     public int getItemCount() {
         return mPost.size();
-    }
-
-
-    private void publisherInfo(final ImageView image_profile, final TextView username, final TextView publisher, String userid) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageurl()).into(image_profile);
-                username.setText(user.getUsername());
-                publisher.setText(user.getUsername());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void isSaved(final String postid, ImageView imageView) {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves")
-                .child(firebaseUser.getUid());
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(postid).exists()) {
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -206,4 +165,45 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             portfoliodate = itemView.findViewById(R.id.portfoliodate);
         }
     }
+
+    private void publisherInfo(final ImageView image_profile, final TextView username, final TextView publisher, String userid) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                Glide.with(mContext).load(user.getImageurl()).into(image_profile);
+                username.setText(user.getUsername());
+                publisher.setText(user.getUsername());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void isSaved(final String postid, final ImageView imageView) {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves")
+                .child(firebaseUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(postid).exists()) {
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 }
