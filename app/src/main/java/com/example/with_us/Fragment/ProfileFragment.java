@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.with_us.Adapter.MyPotofolioAdapter;
+import com.example.with_us.EditProfileActivity;
 import com.example.with_us.LoginActivity;
 import com.example.with_us.MainActivity;
 import com.example.with_us.Model.Post;
@@ -48,7 +50,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    Button portfolio;
+    ImageView portfolio;
 
     ImageView image_profile;
     TextView posts, projects, heart, username, subject;
@@ -123,8 +125,8 @@ public class ProfileFragment extends Fragment {
 
 
 
-        recyclerView.setVisibility(View.GONE);
-        recyclerView_project.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+        recyclerView_project.setVisibility(View.GONE);
 
         userInfo();
         getNPosts();
@@ -136,7 +138,7 @@ public class ProfileFragment extends Fragment {
             edit_profile.setText("프로필 수정");
         } else {
             checkFollow();
-           // saved_fotos.setvisibility(View.GONE);
+            my_portfolio.setVisibility(View.GONE);
         }
 
 
@@ -144,19 +146,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String btn = edit_profile.getText().toString();
+                Log.d("ms", image_profile.getTag().toString());
 
                 if (btn.equals("Edit Profile")) {
-                    //go to EditProfile
-                } else if (btn.equals("follow")) {
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
-                            .child("following").child(user.getId()).setValue(true);
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
-                            .child("followers").child(firebaseUser.getUid()).setValue(true);
-                } else if (btn.equals("following")) {
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
-                            .child("following").child(profileid).removeValue();
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
-                            .child("followers").child(firebaseUser.getUid()).removeValue();
+
+                    startActivity(new Intent(getActivity(), EditProfileActivity.class));
                 }
             }
         });

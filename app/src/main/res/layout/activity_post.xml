@@ -35,16 +35,6 @@
                     android:textSize="35dp"
                     android:fontFamily="@font/yanolja_regular" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:src="@drawable/tabicon"
-                    android:id="@+id/close"/>
-
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>

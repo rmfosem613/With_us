@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -86,7 +87,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             holder.purpose.setText(project.getPurpose_write());
         }
 
-        publisherInfo(holder.image_profile, holder.username, holder.publisher, project.getPublisher());
+        publisherInfo(holder.image_profile, holder.publisher, holder.subject, project.getPublisher());
         isSaved(project.getPostid(), holder.save);
 
         //프로필에서 사진 누르면 화면 이동
@@ -102,18 +103,6 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             }
         });
 
-        holder.username.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-
-                editor.putString("profileid", project.getPublisher());
-                editor.apply();
-
-                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
-            }
-        });
 
         holder.publisher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,15 +116,15 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             }
         });
 
-        holder.post_image.setOnClickListener(new View.OnClickListener() {
+        holder.subject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                editor.putString("postid", project.getPostid());
+                editor.putString("profileid", project.getSubject());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PostDetailFragment()).commit();
+                        new ProfileFragment()).commit();
             }
         });
     }
@@ -147,15 +136,16 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        //public ImageView image_profile, post_image, like, comment, save;
-        public TextView purpose, date, publisher, title, content_write;
+        public ImageView image_profile, save;
+        public TextView purpose, date, title, content_write, publisher, subject;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            subject = itemView.findViewById(R.id.subject);
             purpose = itemView.findViewById(R.id.purpose_write);
-            date = itemView.findViewById(R.id.data_write);
+            image_profile = itemView.findViewById(R.id.image_profile);
             publisher = itemView.findViewById(R.id.publisher);
+            date = itemView.findViewById(R.id.data_write);
             title = itemView.findViewById(R.id.title_write);
             content_write = itemView.findViewById(R.id.content_write);
 
@@ -163,7 +153,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         }
     }
 
-    private void publisherInfo(final ImageView image_profile, final TextView username, final TextView publisher, String userid) {
+    private void publisherInfo(final ImageView image_profile, final TextView subject, final TextView publisher, String userid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -171,7 +161,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 Glide.with(mContext).load(user.getImageurl()).into(image_profile);
-                username.setText(user.getUsername());
+                subject.setText(user.getUsername());
                 publisher.setText(user.getUsername());
             }
 
@@ -201,6 +191,5 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             }
         });
     }
-
 
 }

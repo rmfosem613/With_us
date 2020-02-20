@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.with_us.Adapter.PostAdapter;
 import com.example.with_us.Model.Post;
@@ -35,11 +36,14 @@ public class PostDetailFragment extends Fragment {
     private PostAdapter postAdapter;
     private List<Post> postList;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_post_detail, container, false);
+
+        ImageView close;
 
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         postid = preferences.getString("postid", "none");
