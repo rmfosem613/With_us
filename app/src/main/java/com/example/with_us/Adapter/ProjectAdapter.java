@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.with_us.Fragment.PostDetailFragment;
 import com.example.with_us.Fragment.ProfileFragment;
 import com.example.with_us.Model.Post;
+import com.example.with_us.Model.Project;
 import com.example.with_us.Model.User;
 import com.example.with_us.R;
 import com.google.android.gms.dynamic.IFragmentWrapper;
@@ -35,68 +36,65 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<Post> mPost;
+    private List<Project> mProject;
 
     private FirebaseUser firebaseUser;
 
-    public PostAdapter(Context context, List<Post> posts) {
+    public ProjectAdapter(Context context, List<Project> projects) {
         mContext = context;
-        mPost = posts;
+        mProject = projects;
     }
 
     @NonNull
     @Override
-    public PostAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.post_item, parent, false);
-        return new PostAdapter.ViewHolder(view);
+    public ProjectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.project_item, parent, false);
+        return new ProjectAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Post post = mPost.get(position);
-        Log.d("ms", post.getPostimage().toString());
+        final Project project = mProject.get(position);
+//        Log.d("ms", project.getProjectimage().toString());
 
         //에러
-        Glide
-                .with(mContext)
-                .load(post.getPostimage())
-                .into(holder.post_image);
+//        Glide.with(mContext).load(project.getPostimage()).into(holder.post_image);
 
-        if (post.getDescription().equals("")) {
-            holder.description.setVisibility(View.GONE);
+        if (project.getContent_write().equals("")) {
+            holder.content_write.setVisibility(View.GONE);
         } else {
-            holder.description.setVisibility(View.VISIBLE);
-            holder.description.setText(post.getDescription());
+            holder.content_write.setVisibility(View.VISIBLE);
+            holder.content_write.setText(project.getContent_write());
         }
 
-        if (post.getPortfoliotitle().equals("")) {
-            holder.portfoliotitle.setVisibility(View.GONE);
+        if (project.getData_write().equals("")) {
+            holder.date.setVisibility(View.GONE);
         } else {
-            holder.portfoliotitle.setVisibility(View.VISIBLE);
-            holder.portfoliotitle.setText(post.getPortfoliotitle());
+            holder.date.setVisibility(View.VISIBLE);
+            holder.date.setText(project.getData_write());
         }
 
-        if (post.getPortfoliodate().equals("")) {
-            holder.portfoliodate.setVisibility(View.GONE);
+        if (project.getPurpose_write().equals("")) {
+            holder.purpose.setVisibility(View.GONE);
         } else {
-            holder.portfoliodate.setVisibility(View.VISIBLE);
-            holder.portfoliodate.setText(post.getPortfoliodate());
+            holder.purpose.setVisibility(View.VISIBLE);
+            holder.purpose.setText(project.getPurpose_write());
         }
 
-        publisherInfo(holder.image_profile, holder.username, holder.publisher, post.getPublisher());
-        isSaved(post.getPostid(), holder.save);
+        publisherInfo(holder.image_profile, holder.username, holder.publisher, project.getPublisher());
+        isSaved(project.getPostid(), holder.save);
 
         //프로필에서 사진 누르면 화면 이동
         holder.image_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                editor.putString("profiled", post.getPublisher());
+                editor.putString("profiled", project.getPublisher());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -109,7 +107,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
 
-                editor.putString("profileid", post.getPublisher());
+                editor.putString("profileid", project.getPublisher());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -121,7 +119,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                editor.putString("profileid", post.getPublisher());
+                editor.putString("profileid", project.getPublisher());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -133,7 +131,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                editor.putString("postid", post.getPostid());
+                editor.putString("postid", project.getPostid());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -144,25 +142,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mPost.size();
+        return mProject.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView image_profile, post_image, like, comment, save;
-        public TextView username, subject, likes, publisher, description, portfoliotitle, portfoliodate;
+        //public ImageView image_profile, post_image, like, comment, save;
+        public TextView purpose, date, publisher, title, content_write;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            image_profile = itemView.findViewById(R.id.image_profile);
-            username = itemView.findViewById(R.id.username);
-            subject = itemView.findViewById(R.id.subject);
+            purpose = itemView.findViewById(R.id.purpose_write);
+            date = itemView.findViewById(R.id.data_write);
             publisher = itemView.findViewById(R.id.publisher);
-            post_image = itemView.findViewById(R.id.post_image);
-            description = itemView.findViewById(R.id.description);
-            portfoliotitle = itemView.findViewById(R.id.portfoliotitle);
-            portfoliodate = itemView.findViewById(R.id.portfoliodate);
+            title = itemView.findViewById(R.id.title_write);
+            content_write = itemView.findViewById(R.id.content_write);
+
+
         }
     }
 

@@ -27,6 +27,7 @@ import com.example.with_us.Adapter.MyPotofolioAdapter;
 import com.example.with_us.LoginActivity;
 import com.example.with_us.MainActivity;
 import com.example.with_us.Model.Post;
+import com.example.with_us.Model.Project;
 import com.example.with_us.Model.User;
 import com.example.with_us.PostPortfolioActivity;
 import com.example.with_us.R;
@@ -50,7 +51,7 @@ public class ProfileFragment extends Fragment {
     Button portfolio;
 
     ImageView image_profile;
-    TextView posts, portfolios, heart, username, subject;
+    TextView posts, projects, heart, username, subject;
     Button edit_profile;
 
     //프로필에 보이기 위해서
@@ -95,7 +96,7 @@ public class ProfileFragment extends Fragment {
 
         image_profile = view.findViewById(R.id.image_profile);
         posts = view.findViewById(R.id.posts);
-        portfolios = view.findViewById(R.id.project);
+        projects = view.findViewById(R.id.projects);
         edit_profile = view.findViewById(R.id.edit_profile);
         my_project = view.findViewById(R.id.my_project);
         my_portfolio = view.findViewById(R.id.my_portfolio);
@@ -105,7 +106,7 @@ public class ProfileFragment extends Fragment {
         //야이가 포트폴리오
         recyclerView = view.findViewById(R.id.recycler_portfolio);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
+        LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(linearLayoutManager);
         postList = new ArrayList<>();
         myPortofolioAdapter = new MyPotofolioAdapter(getContext(), postList);
@@ -114,7 +115,7 @@ public class ProfileFragment extends Fragment {
         //프로필에 따로 보이게 하려고 하는 거(프로젝트)
         recyclerView_project = view.findViewById(R.id.recycler_project);
         recyclerView_project.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager_project= new GridLayoutManager(getContext(), 3);
+        LinearLayoutManager linearLayoutManager_project= new GridLayoutManager(getContext(), 2);
         recyclerView_project.setLayoutManager(linearLayoutManager_project);
         postList_project = new ArrayList<>();
         myPotofolioAdapter_project = new MyPotofolioAdapter(getContext(), postList_project);
@@ -127,6 +128,7 @@ public class ProfileFragment extends Fragment {
 
         userInfo();
         getNPosts();
+        getProject();
         myPortfolio();
         mysaves();
 
@@ -222,7 +224,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-
+//포트폴리오 숫자 올리기
     private void getNPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
@@ -237,6 +239,29 @@ public class ProfileFragment extends Fragment {
                 }
 
                 posts.setText(""+i);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+//프로젝트 숫자 올리기
+    private void getProject() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Projects");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Project project = snapshot.getValue(Project.class);
+                    if (project.getPublisher().equals(profileid)){
+                        i++;
+                    }
+                }
+
+                projects.setText(""+i);
             }
 
             @Override

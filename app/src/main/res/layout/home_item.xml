@@ -7,40 +7,68 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/square">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_margin="10dp"
                 android:id="@+id/image_profile"
                 android:src="@mipmap/ic_launcher"/>
-
-            <TextView
-                android:layout_width="wrap_content"
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/username"
-                android:layout_gravity="center_vertical"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="username"/>
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/purpose_write"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="목적"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:id="@+id/subject"
+                    android:textSize="20sp"
+                    android:text="학과"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title_write"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="제목"/>
+            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 
-
-        <ImageView
-            android:id="@+id/post_image"
-            android:layout_width="390dp"
-            android:layout_height="520dp"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher" />
-
+<!--
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +104,7 @@
             android:textColor="@color/colorPrimaryDark"/>
 
 
-
+-->
     </LinearLayout>
 
 </RelativeLayout>

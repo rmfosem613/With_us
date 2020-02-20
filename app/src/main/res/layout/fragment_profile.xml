@@ -88,18 +88,18 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/projects"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/project"
-                                android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center"
+                                android:textColor="@color/colorPrimaryDark"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="나의 프로젝트"/>
+                                android:text="나의 프로젝트" />
 
                         </LinearLayout>
 

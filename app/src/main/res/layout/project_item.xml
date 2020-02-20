@@ -33,49 +33,52 @@
 
         </LinearLayout>
 
-
-        <ImageView
-            android:id="@+id/post_image"
-            android:layout_width="390dp"
-            android:layout_height="520dp"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher" />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/square">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textStyle="bold"
-            android:id="@+id/publisher"
-            android:text="username"
+            android:textSize="24dp"
+            android:id="@+id/purpose_write"
+            android:text="목적"
             android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:id="@+id/data_write"
             android:textStyle="bold"
-            android:id="@+id/portfoliotitle"
-            android:text="portfoliotitle"
+            android:textSize="24dp"
+            android:text="기간"
             android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:id="@+id/portfoliodate"
-            android:text="portfoliodate"
+            android:id="@+id/title_write"
+            android:text="제목"
+            android:textSize="24dp"
+            android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:id="@+id/description"
+            android:layout_margin="8dp"
+            android:id="@+id/content_write"
+            android:text="내용"
+            android:textSize="24dp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
 
-
+        </LinearLayout>
 
     </LinearLayout>
 
