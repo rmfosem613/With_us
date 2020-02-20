@@ -60,9 +60,8 @@ public class ProfileFragment extends Fragment {
     private List<String> mySaves;
     RecyclerView recyclerView_project;
     MyPotofolioAdapter myPotofolioAdapter_project;
-
-    //
     List<Post> postList_project;
+
 
     RecyclerView recyclerView;
     MyPotofolioAdapter myPortofolioAdapter;
@@ -125,8 +124,8 @@ public class ProfileFragment extends Fragment {
 
 
 
-        recyclerView.setVisibility(View.VISIBLE);
-        recyclerView_project.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        recyclerView_project.setVisibility(View.VISIBLE);
 
         userInfo();
         getNPosts();
@@ -136,9 +135,6 @@ public class ProfileFragment extends Fragment {
 
         if(profileid.equals(firebaseUser.getUid())) {
             edit_profile.setText("프로필 수정");
-        } else {
-            checkFollow();
-            my_portfolio.setVisibility(View.GONE);
         }
 
 
@@ -198,7 +194,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-
+/*
     private void checkFollow() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(firebaseUser.getUid()).child("following");
@@ -218,6 +214,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+ */
 //포트폴리오 숫자 올리기
     private void getNPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
