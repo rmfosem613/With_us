@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textStyle="bold"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:id="@+id/purpose_write"
             android:text="목적"
             android:textColor="@color/colorPrimaryDark"/>
@@ -53,8 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:id="@+id/data_write"
-            android:textStyle="bold"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:text="기간"
             android:textColor="@color/colorPrimaryDark"/>
 
@@ -69,13 +68,11 @@
             android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
             android:id="@+id/content_write"
             android:text="내용"
             android:textSize="24dp"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
 
         </LinearLayout>

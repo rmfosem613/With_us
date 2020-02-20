@@ -142,11 +142,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String btn = edit_profile.getText().toString();
-                Log.d("ms", image_profile.getTag().toString());
 
-                if (btn.equals("Edit Profile")) {
-
-                    startActivity(new Intent(getActivity(), EditProfileActivity.class));
+                if (btn.equals("프로필 수정")) {
+                    startActivity(new Intent(getContext(), EditProfileActivity.class));
                 }
             }
         });
