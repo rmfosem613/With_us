@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new EventFragment();
                             break;
                         case R.id.nav_add:
-                            selectedFragment = null;
-                            startActivity(new Intent(MainActivity.this,PostActivity.class));
+                            selectedFragment = new AddFragment();
                             break;
                         case R.id.nav_search:
                             selectedFragment = new SearchFragment();

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -32,15 +33,38 @@
                 android:textSize="35dp"
                 android:fontFamily="@font/yanolja_regular" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="25dp"
+                android:src="@drawable/searchicon" />
+
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#ccc"
+        android:src="@drawable/writeicon"
+        app:borderWidth="0dp"
+        app:fabSize="normal"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/bar"
         android:id="@+id/recycler_view"/>  //6강 3:40
+
 
 </RelativeLayout>
