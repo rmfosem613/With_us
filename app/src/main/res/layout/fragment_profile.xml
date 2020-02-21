@@ -100,7 +100,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="참가 중인 프로젝트" />
+                                android:text="진행중" />
 
                         </LinearLayout>
 
