@@ -3,6 +3,8 @@ package com.example.with_us.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -50,11 +52,9 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    ImageView portfolio;
-
     ImageView image_profile;
-    TextView posts, projects, heart, username, subject;
-    Button edit_profile;
+    TextView posts, projects, heart, username, subject, follow;
+    TextView edit_profile, plus_portfolio;
 
     //프로필에 보이기 위해서
     private List<String> mySaves;
@@ -74,20 +74,13 @@ public class ProfileFragment extends Fragment {
 
 
     private User user;
+    private Object Uri;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile,container, false);
 
-        portfolio = view.findViewById(R.id.portfolio);
-//포트폴리오 글쓰기 페이지로 가는 버튼
-        portfolio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PostPortfolioActivity.class));
-            }
-        });
 
         //여기서 부터가 12강에서 본 프로필 만드는 기능들
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -96,6 +89,7 @@ public class ProfileFragment extends Fragment {
         profileid = prefs.getString("profileid", "none");
 
         image_profile = view.findViewById(R.id.image_profile);
+        plus_portfolio = view.findViewById(R.id.plus_portfolio);
         posts = view.findViewById(R.id.posts);
         projects = view.findViewById(R.id.projects);
         edit_profile = view.findViewById(R.id.edit_profile);
@@ -134,8 +128,18 @@ public class ProfileFragment extends Fragment {
         mysaves();
 
         if(profileid.equals(firebaseUser.getUid())) {
-            edit_profile.setText("프로필 수정");
+            edit_profile.setText("+");
+            plus_portfolio.setText("포폴 추가");
         }
+
+
+//포트폴리오 글쓰기 페이지로 가는 버튼
+        plus_portfolio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PostPortfolioActivity.class));
+            }
+        });
 
 
         edit_profile.setOnClickListener(new View.OnClickListener() {

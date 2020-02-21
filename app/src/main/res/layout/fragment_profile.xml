@@ -32,15 +32,6 @@
                     android:textSize="35dp"
                     android:fontFamily="@font/yanolja_regular" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="13dp"
-                    android:id="@+id/portfolio"
-                    android:layout_marginRight="25dp"
-                    android:src="@drawable/writeicon" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -62,17 +53,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/top_bar"
-                android:padding="10dp">
+                android:id="@+id/top_bar">
+                <RelativeLayout
+                    android:layout_width="65dp"
+                    android:layout_height="95dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     android:id="@+id/image_profile"/>
+
+                        <TextView
+                            android:id="@+id/edit_profile"
+                            android:layout_marginLeft="50dp"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="22dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="95dp"
+                    android:layout_height="80dp"
                     android:paddingLeft="20dp"
                     android:paddingRight="4dp"
                     android:orientation="vertical">
@@ -100,9 +112,10 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="나의 프로젝트" />
+                                android:text="..." />
 
                         </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -111,9 +124,33 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/posts"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/posts"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="나의 포트폴리오" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/follow"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
@@ -121,25 +158,29 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="포트폴리오"/>
+                                android:text="추천"/>
 
                         </LinearLayout>
 
+                    </LinearLayout>
 
-
-                        </LinearLayout>
-
-                    <Button
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:id="@+id/edit_profile"/>
+                        android:id="@+id/plus_portfolio"
+                        android:layout_marginLeft="135dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorPrimary"
+                        />
 
                 </LinearLayout>
 
+
+
             </LinearLayout>
 
-        <LinearLayout
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
@@ -165,7 +206,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"/>
 
-<!--
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -173,7 +214,7 @@
                 android:maxLines="5"
                 android:id="@+id/bio"
                 android:textColor="@color/colorPrimaryDark"/>
--->
+
         </LinearLayout>
 
         <LinearLayout
