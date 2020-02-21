@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Event {
     private String postid;
-    private String postimage;
+    private String eventimage;
     private String description;
     private String publisher;
     private String eventtitle;
@@ -15,7 +15,7 @@ public class Event {
 
     public Event(String postid, String postimage, String description, String publisher, String eventtitle, String eventdate) {
         this.postid = postid;
-        this.postimage = postimage;
+        this.eventimage = eventimage;
         this.description = description;
         this.publisher = publisher;
         this.eventtitle = eventtitle;
@@ -33,12 +33,12 @@ public class Event {
         this.postid = postid;
     }
 
-    public String getPostimage() {
-        return postimage;
+    public String getEventimage() {
+        return eventimage;
     }
 
-    public void setPostimage(String postimage) {
-        this.postimage = postimage;
+    public void setEventimage(String eventimage) {
+        this.eventimage = eventimage;
     }
 
     public String getDescription() {

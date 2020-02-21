@@ -16,9 +16,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.with_us.Fragment.PostDetailFragment;
-import com.example.with_us.Fragment.ProfileFragment;
-import com.example.with_us.Model.Post;
+import com.example.with_us.EventDetailFragment;
+import com.example.with_us.Fragment.EventFragment;
+import com.example.with_us.Model.Event;
 import com.example.with_us.Model.User;
 import com.example.with_us.R;
 import com.google.android.gms.dynamic.IFragmentWrapper;
@@ -38,11 +38,11 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<Post> mPost;
+    private List<Event> mPost;
 
     private FirebaseUser firebaseUser;
 
-    public EventAdapter(Context context, List<Post> posts) {
+    public EventAdapter(Context context, List<Event> posts) {
         mContext = context;
         mPost = posts;
     }
@@ -50,7 +50,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     @NonNull
     @Override
     public EventAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.post_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.event_item, parent, false);
         return new EventAdapter.ViewHolder(view);
     }
 
@@ -58,34 +58,28 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Post post = mPost.get(position);
-        Log.d("ms", post.getPostimage().toString());
+        final Event post = mPost.get(position);
+        Log.d("ms", post.getEventimage().toString());
 
         //에러
         Glide
                 .with(mContext)
-                .load(post.getPostimage())
-                .into(holder.post_image);
+                .load(post.getEventimage())
+                .into(holder.event_image);
 
-        if (post.getDescription().equals("")) {
-            holder.description.setVisibility(View.GONE);
+
+        if (post.getEventtitle().equals("")) {
+            holder.eventtitle.setVisibility(View.GONE);
         } else {
-            holder.description.setVisibility(View.VISIBLE);
-            holder.description.setText(post.getDescription());
+            holder.eventtitle.setVisibility(View.VISIBLE);
+            holder.eventtitle.setText(post.getEventtitle());
         }
 
-        if (post.getPortfoliotitle().equals("")) {
-            holder.portfoliotitle.setVisibility(View.GONE);
+        if (post.getEventdate().equals("")) {
+            holder.eventdate.setVisibility(View.GONE);
         } else {
-            holder.portfoliotitle.setVisibility(View.VISIBLE);
-            holder.portfoliotitle.setText(post.getPortfoliotitle());
-        }
-
-        if (post.getPortfoliodate().equals("")) {
-            holder.portfoliodate.setVisibility(View.GONE);
-        } else {
-            holder.portfoliodate.setVisibility(View.VISIBLE);
-            holder.portfoliodate.setText(post.getPortfoliodate());
+            holder.eventdate.setVisibility(View.VISIBLE);
+            holder.eventdate.setText(post.getEventdate());
         }
 
         publisherInfo(holder.image_profile, holder.username, holder.publisher, post.getPublisher());
@@ -100,10 +94,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new EventFragment()).commit();
             }
         });
-
+/*
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +107,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new EventFragment()).commit();
             }
         });
 
@@ -125,11 +119,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new EventFragment()).commit();
             }
         });
-
-        holder.post_image.setOnClickListener(new View.OnClickListener() {
+*/
+        holder.event_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
@@ -137,7 +131,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PostDetailFragment()).commit();
+                        new EventDetailFragment()).commit();
             }
         });
     }
@@ -149,20 +143,18 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView image_profile, post_image, like, comment, save;
-        public TextView username, subject, likes, publisher, description, portfoliotitle, portfoliodate;
+        public ImageView image_profile, event_image, save;
+        public TextView username, eventtitle, publisher, eventdate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image_profile = itemView.findViewById(R.id.image_profile);
             username = itemView.findViewById(R.id.username);
-            subject = itemView.findViewById(R.id.subject);
+            eventtitle = itemView.findViewById(R.id.eventtitle);
             publisher = itemView.findViewById(R.id.publisher);
-            post_image = itemView.findViewById(R.id.post_image);
-            description = itemView.findViewById(R.id.description);
-            portfoliotitle = itemView.findViewById(R.id.portfoliotitle);
-            portfoliodate = itemView.findViewById(R.id.portfoliodate);
+            event_image = itemView.findViewById(R.id.event_image);
+            eventdate = itemView.findViewById(R.id.eventdate);
         }
     }
 

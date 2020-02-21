@@ -78,6 +78,8 @@
                     android:layout_height="65dp"
                     android:id="@+id/image_profile"/>
 
+
+
                         <TextView
                             android:id="@+id/edit_profile"
                             android:layout_marginLeft="50dp"
