@@ -99,6 +99,13 @@
             android:id="@+id/subject"
             app:met_floatingLabel="normal"/>
 
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="소개"
+            android:id="@+id/bio"
+            app:met_floatingLabel="normal"/>
+
 
 
     </LinearLayout>

@@ -41,7 +41,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     ImageView close, image_profile;
     TextView save, tv_change;
-    MaterialEditText username, subject;
+    MaterialEditText username, subject, bio;
 
     FirebaseUser firebaseUser;
 
@@ -54,6 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        bio = findViewById(R.id.bio);
         close = findViewById(R.id.close);
         image_profile = findViewById(R.id.image_profile);
         save = findViewById(R.id.save);
@@ -71,6 +72,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
                 subject.setText(user.getSubject());
+                bio.setText(user.getBio());
                 Glide.with(getApplicationContext()).load(user.getImageurl()).into(image_profile);
             }
 
@@ -91,7 +93,8 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateProfile(subject.getText().toString(),
-                        username.getText().toString());
+                        username.getText().toString(),
+                        bio.getText().toString());
             }
         });
 
@@ -116,7 +119,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void updateProfile(String subject, String username){
+    private void updateProfile(String subject, String username,  String bio){
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid());
 

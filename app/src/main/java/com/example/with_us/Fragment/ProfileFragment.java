@@ -55,7 +55,7 @@ import java.util.List;
 public class ProfileFragment extends Fragment {
 
     ImageView image_profile;
-    TextView posts, projects, heart, username, subject, follow;
+    TextView posts, projects, heart, username, subject, followers, bio;
     FloatingActionButton edit_profile, plus_portfolio;
 
     //프로필에 보이기 위해서
@@ -90,7 +90,7 @@ public class ProfileFragment extends Fragment {
 
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileid = prefs.getString("profileid", "none");
-
+        bio = view.findViewById(R.id.bio);
         image_profile = view.findViewById(R.id.image_profile);
         plus_portfolio = view.findViewById(R.id.plus_portfolio);
         posts = view.findViewById(R.id.posts);
@@ -193,6 +193,7 @@ public class ProfileFragment extends Fragment {
                 Glide.with(getContext()).load(user.getImageurl()).into(image_profile);
                 username.setText(user.getUsername());
                 subject.setText(user.getSubject());
+                bio.setText(user.getBio());
             }
 
             @Override
