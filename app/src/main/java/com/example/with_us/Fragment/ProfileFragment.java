@@ -1,5 +1,6 @@
 package com.example.with_us.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,6 +38,7 @@ import com.example.with_us.PostPortfolioActivity;
 import com.example.with_us.R;
 import com.example.with_us.RegisterActivity;
 import com.google.android.gms.common.data.DataBufferSafeParcelable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -54,7 +56,7 @@ public class ProfileFragment extends Fragment {
 
     ImageView image_profile;
     TextView posts, projects, heart, username, subject, follow;
-    TextView edit_profile, plus_portfolio;
+    FloatingActionButton edit_profile, plus_portfolio;
 
     //프로필에 보이기 위해서
     private List<String> mySaves;
@@ -76,6 +78,7 @@ public class ProfileFragment extends Fragment {
     private User user;
     private Object Uri;
 
+    @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -128,8 +131,7 @@ public class ProfileFragment extends Fragment {
         mysaves();
 
         if(profileid.equals(firebaseUser.getUid())) {
-            edit_profile.setText("+");
-            plus_portfolio.setText("포폴 추가");
+            edit_profile.setVisibility(View.VISIBLE);
         }
 
 
@@ -145,11 +147,9 @@ public class ProfileFragment extends Fragment {
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String btn = edit_profile.getText().toString();
 
-                if (btn.equals("프로필 수정")) {
-                    startActivity(new Intent(getContext(), EditProfileActivity.class));
-                }
+                startActivity(new Intent(getContext(), EditProfileActivity.class));
+
             }
         });
 
@@ -159,6 +159,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 recyclerView.setVisibility(View.GONE);
                 recyclerView_project.setVisibility(View.VISIBLE);
+                plus_portfolio.setVisibility(View.GONE);
             }
         });
 
@@ -167,6 +168,10 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 recyclerView.setVisibility(View.VISIBLE);
                 recyclerView_project.setVisibility(View.GONE);
+
+                if(profileid.equals(firebaseUser.getUid())) {
+                    plus_portfolio.setVisibility(View.VISIBLE);
+                }
             }
         });
 
