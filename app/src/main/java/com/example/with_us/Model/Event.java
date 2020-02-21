@@ -10,16 +10,16 @@ public class Event {
     private String postimage;
     private String description;
     private String publisher;
-    private String portfoliotitle;
-    private String portfoliodate;
+    private String eventtitle;
+    private String eventdate;
 
-    public Event(String postid, String postimage, String description, String publisher, String portfoliotitle, String portfoliodate) {
+    public Event(String postid, String postimage, String description, String publisher, String eventtitle, String eventdate) {
         this.postid = postid;
         this.postimage = postimage;
         this.description = description;
         this.publisher = publisher;
-        this.portfoliotitle = portfoliotitle;
-        this.portfoliodate = portfoliodate;
+        this.eventtitle = eventtitle;
+        this.eventdate = eventdate;
     }
 
     public Event() {
@@ -49,20 +49,20 @@ public class Event {
         this.description = description;
     }
 
-    public String getPortfoliotitle() {
-        return portfoliotitle;
+    public String getEventtitle() {
+        return eventtitle;
     }
 
-    public void setPortfoliotitle(String portfoliotitle) {
-        this.portfoliotitle = portfoliotitle;
+    public void setEventtitle(String eventtitle) {
+        this.eventtitle = eventtitle;
     }
 
-    public String getPortfoliodate() {
-        return portfoliodate;
+    public String getEventdate() {
+        return eventdate;
     }
 
-    public void setPortfoliodate(String portfoliodate) {
-        this.portfoliodate = portfoliodate;
+    public void setEventdate(String eventdate) {
+        this.eventdate = eventdate;
     }
 
     public String getPublisher() {
@@ -76,7 +76,7 @@ public class Event {
     @NonNull
     @Override
     public String toString() {
-        String content = "작성자 : " + publisher + ", 제목 :" + portfoliotitle;
+        String content = "작성자 : " + publisher + ", 제목 :" + eventtitle;
 
         return content;
     }
