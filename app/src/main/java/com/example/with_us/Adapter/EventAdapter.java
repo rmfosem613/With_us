@@ -57,9 +57,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Event post = mPost.get(position);
-        Log.d("ms", post.getEventimage().toString());
+//        Log.d("ms", post.getEventimage().toString());
 
-        //에러
+
         Glide
                 .with(mContext)
                 .load(post.getEventimage())

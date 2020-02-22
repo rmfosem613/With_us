@@ -17,9 +17,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.with_us.Adapter.EventAdapter;
 import com.example.with_us.Adapter.MyEventAdapter;
 import com.example.with_us.Model.Event;
 import com.example.with_us.Model.User;
@@ -48,10 +50,10 @@ public class EventFragment extends Fragment {
     TextView eventtitle, eventdate, username;
 
     //프로필에 보이기 위해서
-    private List<String> mySaves;
+
     RecyclerView recyclerView;
     List<Event> postList;
-    MyEventAdapter myEventAdapter;
+    EventAdapter eventAdapter;
 
     FirebaseUser firebaseUser;
     String profileid;
@@ -92,102 +94,29 @@ public class EventFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view_event);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2);
+        linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         postList = new ArrayList<>();
-        myEventAdapter = new MyEventAdapter(getContext(), postList);
-        recyclerView.setAdapter(myEventAdapter);
+        eventAdapter = new EventAdapter(getContext(), postList);
+        recyclerView.setAdapter(eventAdapter);
 
 
-        userInfo();
-        myPortfolio();
-        mysaves();
+        readEvents();
 
         return view;
     }
 
-    private void userInfo() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileid);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (getContext() == null) {
-                    return;
-                }
-
-                User user = dataSnapshot.getValue(User.class);
-
-                Glide.with(getContext())
-                        .load(user.getImageurl()).into(image_profile_event);
-                        username.setText(user.getUsername());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
-
-    private void myPortfolio() {
+    private void readEvents() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Event post = snapshot.getValue(Event.class);
-                    if (post.getPublisher().equals(profileid)) {
-                        postList.add(post);
-                    }
+                    postList.add(snapshot.getValue(Event.class));
+
                 }
-                Collections.reverse(postList);
-                myEventAdapter.notifyDataSetChanged();  //Database에서 변경 확인
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void mysaves() {
-        mySaves = new ArrayList<>();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Saves")
-                .child(firebaseUser.getUid());
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    mySaves.add(snapshot.getKey());
-                }
-
-                myEvent();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
-    private void myEvent() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Event post = snapshot.getValue(Event.class);
-                    if (post.getPublisher().equals(profileid)) {
-                        postList.add(post);
-                    }
-                }
-                myEventAdapter.notifyDataSetChanged();
+//                eventAdapter = new RecyclerView(postList);
             }
 
             @Override
