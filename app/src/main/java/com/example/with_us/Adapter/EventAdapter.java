@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +21,7 @@ import com.example.with_us.Fragment.EventFragment;
 import com.example.with_us.Model.Event;
 import com.example.with_us.Model.User;
 import com.example.with_us.R;
-
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
-
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
@@ -108,7 +110,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                         new EventFragment()).commit();
             }
         });
-/*
+
         holder.publisher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +122,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                         new EventFragment()).commit();
             }
         });
-*/
+
         holder.event_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

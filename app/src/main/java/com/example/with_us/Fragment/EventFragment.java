@@ -116,7 +116,7 @@ public class EventFragment extends Fragment {
                     postList.add(snapshot.getValue(Event.class));
 
                 }
-//                eventAdapter = new RecyclerView(postList);
+                eventAdapter.notifyDataSetChanged();
             }
 
             @Override
