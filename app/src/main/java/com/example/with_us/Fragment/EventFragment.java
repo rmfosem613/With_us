@@ -57,7 +57,6 @@ public class EventFragment extends Fragment {
     String profileid;
     List<Event> postList_event;
 
-    MyEventAdapter myEventAdapter_project;
 
     private User user;
     private Object Uri;
@@ -117,11 +116,8 @@ public class EventFragment extends Fragment {
 
                 User user = dataSnapshot.getValue(User.class);
 
-                Glide
-                        .with(getContext())
-                        .load(user.getImageurl())
-                        .into(image_profile_event);
-                        username.setText(user.getUsername());
+//                Glide.with(getContext()).load(user.getImageurl()).into(image_profile_event);
+//                        username.setText(user.getUsername());
             }
 
             @Override
@@ -167,7 +163,7 @@ public class EventFragment extends Fragment {
                     mySaves.add(snapshot.getKey());
                 }
 
-                readSaves();
+                myEvent();
             }
 
             @Override
@@ -176,21 +172,21 @@ public class EventFragment extends Fragment {
             }
         });
     }
-    private void readSaves() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+
+    private void myEvent() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Event post = snapshot.getValue(Event.class);
-
-                    for (String id : mySaves) {
-                        if (post.getPostid().equals(id)) {
-                            postList_event.add(post);
-                        }
+                    if (post.getPublisher().equals(profileid)) {
+                        postList.add(post);
                     }
                 }
-                myEventAdapter_project.notifyDataSetChanged();
+                myEventAdapter.notifyDataSetChanged();
             }
 
             @Override
