@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.with_us.EventDetailFragment;
 import com.example.with_us.Fragment.EventFragment;
 import com.example.with_us.Model.Event;
 import com.example.with_us.Model.User;
