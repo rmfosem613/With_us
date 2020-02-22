@@ -116,9 +116,9 @@ public class EventFragment extends Fragment {
 
                 User user = dataSnapshot.getValue(User.class);
 
-                Glide.with(getContext());
-//                        .load(user.getImageurl()).into(image_profile_event);
-//                        username.setText(user.getUsername());
+                Glide.with(getContext())
+                        .load(user.getImageurl()).into(image_profile_event);
+                        username.setText(user.getUsername());
             }
 
             @Override
