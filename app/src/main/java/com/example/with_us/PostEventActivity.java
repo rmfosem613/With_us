@@ -2,7 +2,6 @@ package com.example.with_us;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -43,7 +41,7 @@ public class PostEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_portfolio);
+        setContentView(R.layout.activity_post_event);
 
         close = findViewById(R.id.close);
         event_added = findViewById(R.id.event_added);
@@ -111,8 +109,8 @@ public class PostEventActivity extends AppCompatActivity {
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("postid", postid);
                         hashMap.put("postimage", myUri);
-                        hashMap.put("portfoliotitle", eventtitle.getText().toString());
-                        hashMap.put("portfoliodate", eventdate.getText().toString());
+                        hashMap.put("eventtitle", eventtitle.getText().toString());
+                        hashMap.put("eventdate", eventdate.getText().toString());
                         hashMap.put("publisher", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                         reference.child(postid).setValue(hashMap);

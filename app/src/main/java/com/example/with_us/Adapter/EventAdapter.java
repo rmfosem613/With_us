@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.with_us.Fragment.EventDetailFragment;
 import com.example.with_us.Fragment.EventFragment;
 import com.example.with_us.Model.Event;
 import com.example.with_us.Model.User;
@@ -79,11 +80,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             holder.eventdate.setText(post.getEventdate());
         }
 
-        publisherInfo(holder.image_profile, holder.username, holder.publisher, post.getPublisher());
+        publisherInfo(holder.image_profile_event, holder.username, holder.publisher, post.getPublisher());
         isSaved(post.getPostid(), holder.save);
 
         //프로필에서 사진 누르면 화면 이동
-        holder.image_profile.setOnClickListener(new View.OnClickListener() {
+        holder.image_profile_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
@@ -140,13 +141,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView image_profile, event_image, save;
+        public ImageView image_profile_event, event_image, save;
         public TextView username, eventtitle, publisher, eventdate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            image_profile = itemView.findViewById(R.id.image_profile);
+            image_profile_event = itemView.findViewById(R.id.image_profile_event);
             username = itemView.findViewById(R.id.username);
             eventtitle = itemView.findViewById(R.id.eventtitle);
             publisher = itemView.findViewById(R.id.publisher);
@@ -155,14 +156,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
-    private void publisherInfo(final ImageView image_profile, final TextView username, final TextView publisher, String userid) {
+    private void publisherInfo(final ImageView image_profile_event, final TextView username, final TextView publisher, String userid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageurl()).into(image_profile);
+                Glide.with(mContext).load(user.getImageurl()).into(image_profile_event);
                 username.setText(user.getUsername());
                 publisher.setText(user.getUsername());
             }

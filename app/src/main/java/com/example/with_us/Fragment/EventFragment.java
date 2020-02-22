@@ -16,20 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.with_us.Adapter.MyPotofolioAdapter;
-import com.example.with_us.EditProfileActivity;
+import com.example.with_us.Adapter.MyEventAdapter;
 import com.example.with_us.Model.Event;
-import com.example.with_us.Model.Post;
-import com.example.with_us.Model.Project;
 import com.example.with_us.Model.User;
-import com.example.with_us.PostActivity;
 import com.example.with_us.PostEventActivity;
-import com.example.with_us.PostPortfolioActivity;
 import com.example.with_us.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,17 +44,20 @@ public class EventFragment extends Fragment {
 
 
 
-    ImageView image_profile, event_image;
-    TextView eventtitle, eventdate;
+    ImageView image_profile_event, event_image;
+    TextView eventtitle, eventdate, username;
 
     //프로필에 보이기 위해서
     private List<String> mySaves;
     RecyclerView recyclerView;
     List<Event> postList;
+    MyEventAdapter myEventAdapter;
 
     FirebaseUser firebaseUser;
     String profileid;
     List<Event> postList_event;
+
+    MyEventAdapter myEventAdapter_project;
 
     private User user;
     private Object Uri;
@@ -86,10 +83,11 @@ public class EventFragment extends Fragment {
         profileid = prefs.getString("profileid", "none");
 
 
-        image_profile = view.findViewById(R.id.image_profile);
+        image_profile_event = view.findViewById(R.id.image_profile_event);
         event_image = view.findViewById(R.id.event_image);
         eventtitle = view.findViewById(R.id.eventtitle);
         eventdate = view.findViewById(R.id.eventdate);
+        username = view.findViewById(R.id.username);
 
 
         recyclerView = view.findViewById(R.id.recycler_view_event);
@@ -97,8 +95,8 @@ public class EventFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(linearLayoutManager);
         postList = new ArrayList<>();
-//        myPortofolioAdapter = new MyPotofolioAdapter(getContext(), postList);
-//        recyclerView.setAdapter(myPortofolioAdapter);
+        myEventAdapter = new MyEventAdapter(getContext(), postList);
+        recyclerView.setAdapter(myEventAdapter);
 
 
         userInfo();
@@ -119,7 +117,11 @@ public class EventFragment extends Fragment {
 
                 User user = dataSnapshot.getValue(User.class);
 
-                Glide.with(getContext()).load(user.getImageurl()).into(image_profile);
+                Glide
+                        .with(getContext())
+                        .load(user.getImageurl())
+                        .into(image_profile_event);
+                        username.setText(user.getUsername());
             }
 
             @Override
@@ -144,7 +146,7 @@ public class EventFragment extends Fragment {
                     }
                 }
                 Collections.reverse(postList);
-//                myPortofolioAdapter.notifyDataSetChanged();  //Database에서 변경 확인
+                myEventAdapter.notifyDataSetChanged();  //Database에서 변경 확인
             }
 
             @Override
@@ -188,7 +190,7 @@ public class EventFragment extends Fragment {
                         }
                     }
                 }
-//                myPotofolioAdapter_project.notifyDataSetChanged();
+                myEventAdapter_project.notifyDataSetChanged();
             }
 
             @Override
