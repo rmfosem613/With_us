@@ -74,7 +74,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yanolja_regular"
-                    android:text="제목         > "
+                    android:text="제목         >"
                     android:textSize="25dp" />
 
                 <EditText
