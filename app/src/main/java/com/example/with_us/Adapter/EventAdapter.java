@@ -95,7 +95,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                         new EventFragment()).commit();
             }
         });
-/*
+
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +108,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                         new EventFragment()).commit();
             }
         });
-
+/*
         holder.publisher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

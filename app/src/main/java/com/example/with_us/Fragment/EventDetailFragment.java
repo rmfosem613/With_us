@@ -66,41 +66,23 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void readPost() {
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postid);
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Events").getRef();
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // https://stackoverflow.com/questions/46429529/firebase-get-the-reference-of-the-child-of-a-child
-                boolean bOffset = true;
-                int offset = 0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    //here is your every post
-                    String key = snapshot.getKey();
-                    Event value = snapshot.getValue(Event.class);
-
-                    postList.add(value);
-
-                    if (bOffset) {
-                        offset++;
-                    }
-
-                    if (postid.equals(value.getPostid())) {
-                        bOffset = false;
-                        Log.d("ddd", "height: " + recyclerView.computeHorizontalScrollOffset());
-                    }
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                postList.clear();
+                Event post = dataSnapshot.getValue(Event.class);
+                postList.add(post);
 
                 eventAdapter.notifyDataSetChanged();
-                recyclerView.scrollToPosition(offset - 1);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
     }
 }

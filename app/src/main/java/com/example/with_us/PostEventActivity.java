@@ -50,7 +50,7 @@ public class PostEventActivity extends AppCompatActivity {
         eventdate = findViewById(R.id.eventdate);
 
         storageReference = FirebaseStorage.getInstance().getReference("events");
-
+/*
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +58,7 @@ public class PostEventActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+*/
         post_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,7 @@ public class PostEventActivity extends AppCompatActivity {
                         Uri downloadUri = task.getResult();
                         myUri = downloadUri.toString();
 
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
 
                         String postid = reference.push().getKey();
 
