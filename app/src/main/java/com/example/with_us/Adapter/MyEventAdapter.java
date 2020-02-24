@@ -38,15 +38,15 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final Event post = mPosts.get(position);
+        final Event event = mPosts.get(position);
 
-        Glide.with(context).load(post.getEventimage()).into(holder.event_image);
+        Glide.with(context).load(event.getEventimage()).into(holder.event_image);
 
         holder.event_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("postid", post.getPostid());
+                editor.putString("postid", event.getPostid());
                 editor.apply();
 
                 ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

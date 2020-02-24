@@ -21,6 +21,16 @@
                 android:id="@+id/image_profile_event"
                 android:src="@mipmap/ic_launcher"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="username"/>
+
         </LinearLayout>
 
 

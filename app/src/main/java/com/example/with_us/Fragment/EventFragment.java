@@ -52,12 +52,12 @@ public class EventFragment extends Fragment {
     //프로필에 보이기 위해서
 
     RecyclerView recyclerView;
-    List<Event> postList;
+    List<Event> eventList;
     EventAdapter eventAdapter;
 
     FirebaseUser firebaseUser;
     String profileid;
-    List<Event> postList_event;
+//    List<Event> eventList_event;
 
 
     private User user;
@@ -96,8 +96,8 @@ public class EventFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2);
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        postList = new ArrayList<>();
-        eventAdapter = new EventAdapter(getContext(), postList);
+        eventList = new ArrayList<>();
+        eventAdapter = new EventAdapter(getContext(), eventList);
         recyclerView.setAdapter(eventAdapter);
 
 
@@ -106,6 +106,8 @@ public class EventFragment extends Fragment {
         return view;
     }
 
+
+
     private void readEvents() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
         reference.addValueEventListener(new ValueEventListener() {
@@ -113,7 +115,7 @@ public class EventFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    postList.add(snapshot.getValue(Event.class));
+                    eventList.add(snapshot.getValue(Event.class));
 
                 }
                 eventAdapter.notifyDataSetChanged();

@@ -1,6 +1,7 @@
 package com.example.with_us.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,8 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.with_us.Fragment.EventDetailFragment;
 import com.example.with_us.Fragment.EventFragment;
+import com.example.with_us.Fragment.ProfileFragment;
 import com.example.with_us.Model.Event;
 import com.example.with_us.Model.User;
+import com.example.with_us.PostActivity;
 import com.example.with_us.R;
 import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,9 +45,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     private FirebaseUser firebaseUser;
 
-    public EventAdapter(Context context, List<Event> posts) {
+    public EventAdapter(Context context, List<Event> events) {
         mContext = context;
-        mPost = posts;
+        mPost = events;
     }
 
     @NonNull
@@ -58,43 +61,43 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Event post = mPost.get(position);
+        final Event event = mPost.get(position);
 //        Log.d("ms", post.getEventimage().toString());
 
 
         Glide
                 .with(mContext)
-                .load(post.getEventimage())
+                .load(event.getEventimage())
                 .into(holder.event_image);
 
 
-        if (post.getEventtitle().equals("")) {
+        if (event.getEventtitle().equals("")) {
             holder.eventtitle.setVisibility(View.GONE);
         } else {
             holder.eventtitle.setVisibility(View.VISIBLE);
-            holder.eventtitle.setText(post.getEventtitle());
+            holder.eventtitle.setText(event.getEventtitle());
         }
 
-        if (post.getEventdate().equals("")) {
+        if (event.getEventdate().equals("")) {
             holder.eventdate.setVisibility(View.GONE);
         } else {
             holder.eventdate.setVisibility(View.VISIBLE);
-            holder.eventdate.setText(post.getEventdate());
+            holder.eventdate.setText(event.getEventdate());
         }
 
-        publisherInfo(holder.image_profile_event, holder.username, holder.publisher, post.getPublisher());
-        isSaved(post.getPostid(), holder.save);
+        publisherInfo(holder.image_profile_event, holder.username, event.getPublisher());
+        isSaved(event.getPostid(), holder.save);
 
         //프로필에서 사진 누르면 화면 이동
         holder.image_profile_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                editor.putString("profiled", post.getPublisher());
+                editor.putString("profiled", event.getPublisher());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new EventFragment()).commit();
+                        new ProfileFragment()).commit();
             }
         });
 
@@ -103,23 +106,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
 
-                editor.putString("profileid", post.getPublisher());
+                editor.putString("profileid", event.getPublisher());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new EventFragment()).commit();
-            }
-        });
-
-        holder.publisher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                editor.putString("profileid", post.getPublisher());
-                editor.apply();
-
-                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new EventFragment()).commit();
+                        new ProfileFragment()).commit();
             }
         });
 
@@ -127,7 +118,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                editor.putString("postid", post.getPostid());
+                editor.putString("postid", event.getPostid());
                 editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -158,7 +149,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
-    private void publisherInfo(final ImageView image_profile_event, final TextView username, final TextView publisher, String userid) {
+    private void publisherInfo(final ImageView image_profile_event, final TextView username, String userid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -167,7 +158,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 User user = dataSnapshot.getValue(User.class);
                 Glide.with(mContext).load(user.getImageurl()).into(image_profile_event);
                 username.setText(user.getUsername());
-                publisher.setText(user.getUsername());
             }
 
             @Override

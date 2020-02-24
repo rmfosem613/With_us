@@ -36,7 +36,7 @@ public class EventDetailFragment extends Fragment {
     String postid;
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
-    private List<Event> postList;
+    private List<Event> eventList;
 
 
     @Override
@@ -53,8 +53,8 @@ public class EventDetailFragment extends Fragment {
 //        recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        postList = new ArrayList<>();
-        eventAdapter = new EventAdapter(getContext(), postList);
+        eventList = new ArrayList<>();
+        eventAdapter = new EventAdapter(getContext(), eventList);
         recyclerView.setAdapter(eventAdapter);
 
 
@@ -66,23 +66,39 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void readPost() {
-
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Events").getRef();
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.clear();
-                Event post = dataSnapshot.getValue(Event.class);
-                postList.add(post);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean bOffset = true;
+                int offset = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    //here is your every post
+                    String key = snapshot.getKey();
+                    Event value = snapshot.getValue(Event.class);
+
+                    eventList.add(value);
+
+                    if (bOffset) {
+                        offset++;
+                    }
+
+                    if (postid.equals(value.getPostid())) {
+                        bOffset = false;
+                        Log.d("ddd", "height: " + recyclerView.computeHorizontalScrollOffset());
+                    }
+                }
 
                 eventAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(offset - 1);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
     }
 }
