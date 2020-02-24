@@ -61,7 +61,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         final Post post = mPost.get(position);
         Log.d("ms", post.getPostimage().toString());
 
-
         Glide
                 .with(mContext)
                 .load(post.getPostimage())

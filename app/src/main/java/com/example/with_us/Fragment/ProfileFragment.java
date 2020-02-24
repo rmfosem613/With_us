@@ -222,7 +222,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
- */
+*/
 //포트폴리오 숫자 올리기
     private void getNPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");

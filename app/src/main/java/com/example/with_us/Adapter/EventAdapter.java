@@ -3,6 +3,7 @@ package com.example.with_us.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,20 +41,20 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
-    private Context mContext;
-    private List<Event> mPost;
+    private Context mContext1;
+    private List<Event> mEvent;
 
     private FirebaseUser firebaseUser;
 
     public EventAdapter(Context context, List<Event> events) {
-        mContext = context;
-        mPost = events;
+        mContext1 = context;
+        mEvent = events;
     }
 
     @NonNull
     @Override
     public EventAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.event_item, parent, false);
+        View view = LayoutInflater.from(mContext1).inflate(R.layout.event_item, parent, false);
         return new EventAdapter.ViewHolder(view);
     }
 
@@ -61,12 +62,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Event event = mPost.get(position);
-//        Log.d("ms", post.getEventimage().toString());
-
+        final Event event = mEvent.get(position);
 
         Glide
-                .with(mContext)
+                .with(mContext1)
                 .load(event.getEventimage())
                 .into(holder.event_image);
 
@@ -92,11 +91,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.image_profile_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = mContext1.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
                 editor.putString("profiled", event.getPublisher());
                 editor.apply();
 
-                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) mContext1).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
             }
         });
@@ -104,12 +103,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = mContext1.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
 
                 editor.putString("profileid", event.getPublisher());
                 editor.apply();
 
-                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) mContext1).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
             }
         });
@@ -117,11 +116,23 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.event_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = mContext1.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
                 editor.putString("postid", event.getPostid());
                 editor.apply();
 
-                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) mContext1).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new EventDetailFragment()).commit();
+            }
+        });
+
+        holder.eventtitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext1.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                editor.putString("postid", event.getPostid());
+                editor.apply();
+
+                ((FragmentActivity) mContext1).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new EventDetailFragment()).commit();
             }
         });
@@ -129,7 +140,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mPost.size();
+        return mEvent.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -156,7 +167,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageurl()).into(image_profile_event);
+
+//                Log.d(TAG, user);
+                Glide.with(mContext1).
+                        load(user.getImageurl()).
+                        into(image_profile_event);
                 username.setText(user.getUsername());
             }
 
@@ -177,6 +192,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(postid).exists()) {
+
                 }
             }
 
@@ -186,7 +202,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             }
         });
     }
-
 
 
 }

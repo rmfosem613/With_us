@@ -53,7 +53,7 @@ public class EventFragment extends Fragment {
 
     RecyclerView recyclerView;
     List<Event> eventList;
-    EventAdapter eventAdapter;
+    MyEventAdapter myEventAdapter;
 
     FirebaseUser firebaseUser;
     String profileid;
@@ -80,30 +80,55 @@ public class EventFragment extends Fragment {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileid = prefs.getString("profileid", "none");
 
 
         image_profile_event = view.findViewById(R.id.image_profile_event);
         event_image = view.findViewById(R.id.event_image);
-        eventtitle = view.findViewById(R.id.eventtitle);
+        eventtitle= view.findViewById(R.id.eventtitle);
         eventdate = view.findViewById(R.id.eventdate);
         username = view.findViewById(R.id.username);
 
 
         recyclerView = view.findViewById(R.id.recycler_view_event);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2);
-        linearLayoutManager.setReverseLayout(true);
+        LinearLayoutManager linearLayoutManager = new GridLayoutManager(this.getContext(), 2);
+//        linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         eventList = new ArrayList<>();
-        eventAdapter = new EventAdapter(getContext(), eventList);
-        recyclerView.setAdapter(eventAdapter);
+        myEventAdapter = new MyEventAdapter(getContext(), eventList);
+        recyclerView.setAdapter(myEventAdapter);
 
-
+        userInfo();
         readEvents();
 
         return view;
+    }
+
+    private void userInfo() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (getContext() == null) {
+                    return;
+                }
+
+                User user = dataSnapshot.getValue(User.class);
+
+                Glide
+                        .with(getContext())
+                        .load(user.getImageurl())
+                        .into(image_profile_event);
+                username.setText(user.getUsername());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -118,7 +143,7 @@ public class EventFragment extends Fragment {
                     eventList.add(snapshot.getValue(Event.class));
 
                 }
-                eventAdapter.notifyDataSetChanged();
+                myEventAdapter.notifyDataSetChanged();
             }
 
             @Override

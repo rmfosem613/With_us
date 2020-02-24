@@ -17,9 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.with_us.Adapter.EventAdapter;
-import com.example.with_us.Adapter.PostAdapter;
 import com.example.with_us.Model.Event;
-import com.example.with_us.Model.Post;
 import com.example.with_us.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,13 +43,14 @@ public class EventDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_event_detail, container, false);
 
+        ImageView close;
 
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         postid = preferences.getString("postid", "none");
 
-        recyclerView = view.findViewById(R.id.recycler_view_event);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 //        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         eventList = new ArrayList<>();
         eventAdapter = new EventAdapter(getContext(), eventList);
@@ -66,36 +65,20 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void readPost() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Events").getRef();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events").child(postid);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean bOffset = true;
-                int offset = 0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    //here is your every post
-                    String key = snapshot.getKey();
-                    Event value = snapshot.getValue(Event.class);
-
-                    eventList.add(value);
-
-                    if (bOffset) {
-                        offset++;
-                    }
-
-                    if (postid.equals(value.getPostid())) {
-                        bOffset = false;
-                        Log.d("ddd", "height: " + recyclerView.computeHorizontalScrollOffset());
-                    }
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                eventList.clear();
+                Event event = dataSnapshot.getValue(Event.class);
+                eventList.add(event);
 
                 eventAdapter.notifyDataSetChanged();
-                recyclerView.scrollToPosition(offset - 1);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

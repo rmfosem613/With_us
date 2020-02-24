@@ -8,7 +8,6 @@ public class User {
     private String imageurl;
     private String bio;
 
-
     public User(String id, String username, String subject, String imageurl, String bio) {
         this.id = id;
         this.username = username;
