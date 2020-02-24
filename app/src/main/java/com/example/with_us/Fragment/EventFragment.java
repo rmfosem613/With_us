@@ -80,7 +80,7 @@ public class EventFragment extends Fragment {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileid = prefs.getString("profileid", "none");
 
 
@@ -94,7 +94,7 @@ public class EventFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view_event);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(this.getContext(), 2);
-//        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         eventList = new ArrayList<>();
         myEventAdapter = new MyEventAdapter(getContext(), eventList);
