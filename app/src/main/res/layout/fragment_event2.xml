@@ -60,11 +60,18 @@
         app:borderWidth="0dp"
         app:fabSize="normal" />
 
+    <ImageView
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/event"/>
+
+<!--
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/bar" />
-
+-->
 
 </RelativeLayout>

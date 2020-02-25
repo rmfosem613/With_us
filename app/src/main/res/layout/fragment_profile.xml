@@ -237,11 +237,19 @@
         android:layout_below="@+id/bar"
         android:layout_marginTop="0dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="78dp"
+            android:id="@+id/image_ex"
+            android:src="@drawable/eventitem5"/>
+
         //프로젝트 보여줌
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_project"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         //포트폴리오 보여줌
         <androidx.recyclerview.widget.RecyclerView
