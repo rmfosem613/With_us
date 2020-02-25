@@ -90,7 +90,7 @@ public class EventFragment extends Fragment {
         eventdate = view.findViewById(R.id.eventdate);
         username = view.findViewById(R.id.username);
 
-
+/*
         recyclerView = view.findViewById(R.id.recycler_view_event);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(this.getContext(), 2);
@@ -99,7 +99,7 @@ public class EventFragment extends Fragment {
         eventList = new ArrayList<>();
         myEventAdapter = new MyEventAdapter(getContext(), eventList);
         recyclerView.setAdapter(myEventAdapter);
-
+*/
         userInfo();
         readEvents();
 
@@ -119,9 +119,9 @@ public class EventFragment extends Fragment {
 
                 Glide
                         .with(getContext())
-                        .load(user.getImageurl())
-                        .into(image_profile_event);
-                username.setText(user.getUsername());
+                        .load(user.getImageurl());
+//                        .into(image_profile_event);
+//                username.setText(user.getUsername());
             }
 
             @Override
@@ -140,10 +140,10 @@ public class EventFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    eventList.add(snapshot.getValue(Event.class));
+//                    eventList.add(snapshot.getValue(Event.class));
 
                 }
-                myEventAdapter.notifyDataSetChanged();
+//                myEventAdapter.notifyDataSetChanged();
             }
 
             @Override

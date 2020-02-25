@@ -18,7 +18,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:id="@+id/image_profile_event"
+                android:id="@+id/image_profile_event1"
                 android:src="@mipmap/ic_launcher"/>
 
             <TextView

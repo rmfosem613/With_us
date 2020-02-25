@@ -54,8 +54,8 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    ImageView image_profile;
-    TextView posts, projects, heart, username, subject, followers, bio;
+    ImageView image_profile, image_ex;
+    TextView posts, projects, heart, username, subject, follow, bio;
     FloatingActionButton edit_profile, plus_portfolio;
 
     //프로필에 보이기 위해서
@@ -91,6 +91,7 @@ public class ProfileFragment extends Fragment {
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileid = prefs.getString("profileid", "none");
         bio = view.findViewById(R.id.bio);
+        image_ex = view.findViewById(R.id.image_ex);
         image_profile = view.findViewById(R.id.image_profile);
         plus_portfolio = view.findViewById(R.id.plus_portfolio);
         posts = view.findViewById(R.id.posts);
@@ -100,6 +101,7 @@ public class ProfileFragment extends Fragment {
         my_portfolio = view.findViewById(R.id.my_portfolio);
         username = view.findViewById(R.id.username);
         subject = view.findViewById(R.id.subject);
+        follow = view.findViewById(R.id.follow);
 
         //야이가 포트폴리오
         recyclerView = view.findViewById(R.id.recycler_portfolio);
@@ -127,6 +129,7 @@ public class ProfileFragment extends Fragment {
         userInfo();
         getNPosts();
         getProject();
+        getFollow();
         myPortfolio();
         mysaves();
 
@@ -160,12 +163,19 @@ public class ProfileFragment extends Fragment {
                 recyclerView.setVisibility(View.GONE);
                 recyclerView_project.setVisibility(View.VISIBLE);
                 plus_portfolio.setVisibility(View.GONE);
+
+                if (my_project != null) {
+                    image_ex.setVisibility(View.GONE);
+                } else {
+                    image_ex.setVisibility(View.VISIBLE);
+                }
             }
         });
 
         my_portfolio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                image_ex.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
                 recyclerView_project.setVisibility(View.GONE);
 
@@ -261,6 +271,30 @@ public class ProfileFragment extends Fragment {
                 }
 
                 projects.setText(""+i);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    //추천 수 올리기
+    private void getFollow() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Project project = snapshot.getValue(Project.class);
+                    if (project.getPublisher().equals(profileid)){
+                        i++;
+                    }
+                }
+
+                follow.setText(""+i);
             }
 
             @Override
