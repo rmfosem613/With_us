@@ -14,6 +14,7 @@ import com.example.with_us.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+//리스트 보이기
 
 public class HomeFragment extends Fragment {
 

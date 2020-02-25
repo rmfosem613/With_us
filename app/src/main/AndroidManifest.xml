@@ -11,7 +11,8 @@
         android:label="With us"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PostEventActivity"></activity>
+        <activity android:name=".WriteActivity"></activity>
+        <activity android:name=".PostEventActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".PostPortfolioActivity" />
         <activity android:name=".PostActivity" />
