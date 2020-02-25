@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,68 +8,60 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <TextView
-        android:id="@+id/TitleView"
-        android:layout_width="373dp"
-        android:layout_height="44dp"
-        android:layout_margin="8dp"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152" />
+        <TextView
+            android:id="@+id/TitleView"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textSize="27dp"
+            android:fontFamily="@font/yanolja_regular"
+            android:layout_marginLeft="5dp"/>
 
-    <TextView
-        android:id="@+id/DateView"
-        android:layout_width="373dp"
-        android:layout_height="33dp"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.789"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitleView"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/DateView"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:fontFamily="@font/yanolja_regular"
+            android:textSize="24dp"
+            android:layout_marginLeft="5dp"/>
 
-    <TextView
-        android:id="@+id/ContentView"
-        android:layout_width="373dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.789"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DateView"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/ContentView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/yanolja_regular"
+            android:text="TextView"
+            android:textSize="24dp"
+            android:layout_marginLeft="5dp"/>
 
-    <Button
-        android:id="@+id/attendantButton"
-        android:layout_width="71dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="4dp"
-        android:background="@android:color/darker_gray"
-        android:fontFamily="@font/yanolja_regular"
-        android:text="참석"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ContentView"
-        app:layout_constraintVertical_bias="1.0" />
+        <Button
+            android:id="@+id/attendantButton"
+            android:layout_width="81dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="320dp"
+            android:background="@android:color/darker_gray"
+            android:fontFamily="@font/yanolja_regular"
+            android:text="참석"
+            android:textSize="27dp"/>
 
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 
 
 
