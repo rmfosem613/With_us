@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:id="@+id/title_write"
+            android:id="@+id/writeTitle"
             android:text="제목"
             android:textSize="24dp"
             android:textStyle="bold"
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/content_write"
+            android:id="@+id/writeContent"
             android:text="내용"
             android:textSize="24dp"
             android:textColor="@color/colorPrimaryDark"/>

@@ -32,7 +32,7 @@ import com.example.with_us.EditProfileActivity;
 import com.example.with_us.LoginActivity;
 import com.example.with_us.MainActivity;
 import com.example.with_us.Model.Post;
-import com.example.with_us.Model.Project;
+import com.example.with_us.Model.Board;
 import com.example.with_us.Model.User;
 import com.example.with_us.PostPortfolioActivity;
 import com.example.with_us.R;
@@ -254,10 +254,10 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int i = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Project project = snapshot.getValue(Project.class);
-                    if (project.getPublisher().equals(profileid)){
-                        i++;
-                    }
+                    Board project = snapshot.getValue(Board.class);
+//                    if (project.getPublisher().equals(profileid)){
+//                        i++;
+//                    }
                 }
 
                 projects.setText(""+i);

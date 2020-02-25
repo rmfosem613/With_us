@@ -21,9 +21,9 @@ import com.bumptech.glide.Glide;
 import com.example.with_us.Fragment.EventDetailFragment;
 import com.example.with_us.Fragment.EventFragment;
 import com.example.with_us.Fragment.ProfileFragment;
+import com.example.with_us.Model.Board;
 import com.example.with_us.Model.Event;
 import com.example.with_us.Model.User;
-import com.example.with_us.PostActivity;
 import com.example.with_us.R;
 import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +49,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public EventAdapter(Context context, List<Event> events) {
         mContext1 = context;
         mEvent = events;
+
     }
 
     @NonNull
