@@ -288,10 +288,10 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int i = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Project project = snapshot.getValue(Project.class);
-                    if (project.getPublisher().equals(profileid)){
-                        i++;
-                    }
+                    Board project = snapshot.getValue(Board.class);
+//                    if (project.getPublisher().equals(profileid)){
+//                        i++;
+//                    }
                 }
 
                 follow.setText(""+i);
